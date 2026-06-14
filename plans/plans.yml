@@ -1,0 +1,135 @@
+plans:
+  - name: Free (No Key)
+    description: >
+      Access blockchain data without registration or an API key. Suitable
+      for development testing and low-volume personal projects. Attribution
+      not required for personal or private use.
+    url: https://snowtrace.io/documentation
+    price: 0.00
+    currency: USD
+    billingCycle: monthly
+    rateLimit:
+      requests: 2
+      unit: second
+    quotas:
+      - name: Daily API calls
+        limit: 10000
+        unit: day
+    features:
+      - No API key required
+      - Access to all Etherscan-compatible endpoints
+      - Multichain access via chainId parameter
+  - name: Free (Registered)
+    description: >
+      Register a free account on routescan.io to receive a free API key
+      with higher rate limits. FREE plan requires a backlink or
+      "Powered by Routescan.io APIs" attribution mention (except personal
+      or private use).
+    url: https://snowtrace.io/documentation
+    price: 0.00
+    currency: USD
+    billingCycle: monthly
+    rateLimit:
+      requests: 5
+      unit: second
+    quotas:
+      - name: Daily API calls
+        limit: 100000
+        unit: day
+    features:
+      - API key required (free registration)
+      - Access to all Etherscan-compatible endpoints
+      - Multichain access via chainId parameter
+      - Attribution required for public use
+      - General support
+  - name: Standard
+    description: >
+      Paid plan for teams building production-grade blockchain applications
+      that require higher throughput and daily call volumes beyond the
+      free tier.
+    url: https://snowtrace.io/documentation
+    price: 160.00
+    currency: USD
+    billingCycle: monthly
+    rateLimit:
+      requests: 10
+      unit: second
+    quotas:
+      - name: Daily API calls
+        limit: 200000
+        unit: day
+    features:
+      - API key required
+      - Access to all Etherscan-compatible endpoints
+      - Multichain access
+      - Priority support
+      - 15% discount with quarterly billing
+      - 20% discount with yearly billing
+  - name: Advanced
+    description: >
+      Higher-throughput plan for analytics platforms and dApps with
+      significant blockchain data query volume requirements.
+    url: https://snowtrace.io/documentation
+    price: 240.00
+    currency: USD
+    billingCycle: monthly
+    rateLimit:
+      requests: 20
+      unit: second
+    quotas:
+      - name: Daily API calls
+        limit: 500000
+        unit: day
+    features:
+      - API key required
+      - Access to all Etherscan-compatible endpoints
+      - Multichain access
+      - Priority support
+      - 15% discount with quarterly billing
+      - 20% discount with yearly billing
+  - name: Professional
+    description: >
+      Professional-grade plan for high-volume applications such as
+      institutional analytics, trading platforms, and protocol dashboards
+      requiring up to one million daily API calls.
+    url: https://snowtrace.io/documentation
+    price: 320.00
+    currency: USD
+    billingCycle: monthly
+    rateLimit:
+      requests: 30
+      unit: second
+    quotas:
+      - name: Daily API calls
+        limit: 1000000
+        unit: day
+    features:
+      - API key required
+      - Access to all Etherscan-compatible endpoints
+      - Multichain access
+      - Priority support
+      - 15% discount with quarterly billing
+      - 20% discount with yearly billing
+  - name: Pro Plus
+    description: >
+      Top-tier plan for the most demanding blockchain data consumers
+      requiring the highest daily call allowances at the same maximum
+      request rate as the Professional plan.
+    url: https://snowtrace.io/documentation
+    price: 440.00
+    currency: USD
+    billingCycle: monthly
+    rateLimit:
+      requests: 30
+      unit: second
+    quotas:
+      - name: Daily API calls
+        limit: 1500000
+        unit: day
+    features:
+      - API key required
+      - Access to all Etherscan-compatible endpoints
+      - Multichain access
+      - Priority support
+      - 15% discount with quarterly billing
+      - 20% discount with yearly billing

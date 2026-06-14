@@ -1,0 +1,196 @@
+name: Routescan (Snowtrace)
+description: >
+  Routescan is the first multichain ecosystem explorer, search, API, and
+  analytics platform for all major EVM chains. Operating as Snowtrace for
+  Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with
+  the Etherscan API format, delivering near real-time access to transactions,
+  token transfers, smart contract data, and event logs across Avalanche C-Chain,
+  Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants
+  multichain access across all indexed chains.
+image: https://snowtrace.io/favicon.ico
+tags:
+  - Blockchain
+  - Explorer
+  - Avalanche
+  - EVM
+  - Multichain
+  - Web3
+  - Transactions
+  - Smart Contracts
+  - NFTs
+  - DeFi
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+apis:
+  - name: Routescan Etherscan-Compatible Account API
+    description: >
+      Retrieve address balances, normal and internal transaction histories,
+      ERC-20 token transfers, ERC-721 NFT transfers, ERC-1155 token transfers,
+      and historical balance data by block number for any EVM address across
+      all Routescan-indexed chains.
+    image: https://snowtrace.io/favicon.ico
+    humanURL: https://snowtrace.io/documentation/api/etherscan-like/accounts
+    baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+    tags:
+      - Accounts
+      - Balances
+      - Transactions
+      - ERC-20
+      - ERC-721
+      - ERC-1155
+    properties:
+      - type: Documentation
+        url: https://snowtrace.io/documentation/api/etherscan-like/accounts
+    contact:
+      - FN: Routescan Support
+        url: https://snowtrace.io/contactus
+    meta:
+      - key: chainId-avalanche-c-chain
+        value: "43114"
+      - key: chainId-avalanche-fuji-testnet
+        value: "43113"
+  - name: Routescan Etherscan-Compatible Block API
+    description: >
+      Query block rewards and estimated block countdown for specific block
+      numbers on any Routescan-indexed EVM chain.
+    image: https://snowtrace.io/favicon.ico
+    humanURL: https://snowtrace.io/documentation
+    baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+    tags:
+      - Blocks
+      - Block Rewards
+    properties:
+      - type: Documentation
+        url: https://snowtrace.io/documentation
+  - name: Routescan Etherscan-Compatible Contract API
+    description: >
+      Access verified smart contract ABIs, source code, and creation
+      transaction data. Supports contract source code verification via POST
+      with up to 250 verifications per day, and status checking for
+      verification submissions.
+    image: https://snowtrace.io/favicon.ico
+    humanURL: https://snowtrace.io/documentation/api/etherscan-like/contracts
+    baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+    tags:
+      - Contracts
+      - Smart Contracts
+      - ABI
+      - Verification
+    properties:
+      - type: Documentation
+        url: https://snowtrace.io/documentation/api/etherscan-like/contracts
+  - name: Routescan Etherscan-Compatible Logs API
+    description: >
+      Query event logs emitted by smart contracts using filter parameters
+      including address, block range, and up to four indexed topics. Useful
+      for tracking on-chain events in real time.
+    image: https://snowtrace.io/favicon.ico
+    humanURL: https://snowtrace.io/documentation
+    baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+    tags:
+      - Logs
+      - Events
+      - Smart Contracts
+    properties:
+      - type: Documentation
+        url: https://snowtrace.io/documentation
+  - name: Routescan Etherscan-Compatible Token API
+    description: >
+      Retrieve ERC-20 token supply, token holder information, and token
+      metadata for fungible tokens on Routescan-indexed EVM chains.
+    image: https://snowtrace.io/favicon.ico
+    humanURL: https://snowtrace.io/documentation
+    baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+    tags:
+      - Tokens
+      - ERC-20
+      - Token Supply
+    properties:
+      - type: Documentation
+        url: https://snowtrace.io/documentation
+  - name: Routescan Etherscan-Compatible Stats API
+    description: >
+      Access network statistics including total AVAX supply, last price,
+      and validator/node count for the Avalanche C-Chain and other
+      supported EVM networks.
+    image: https://snowtrace.io/favicon.ico
+    humanURL: https://snowtrace.io/documentation
+    baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+    tags:
+      - Stats
+      - Network
+      - Supply
+    properties:
+      - type: Documentation
+        url: https://snowtrace.io/documentation
+  - name: Routescan Etherscan-Compatible Transaction API
+    description: >
+      Check transaction execution status (success or failure) and receipt
+      status for any transaction hash on Routescan-indexed EVM chains.
+    image: https://snowtrace.io/favicon.ico
+    humanURL: https://snowtrace.io/documentation
+    baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+    tags:
+      - Transactions
+      - Status
+      - Receipts
+    properties:
+      - type: Documentation
+        url: https://snowtrace.io/documentation
+  - name: Routescan Geth/Parity Proxy API
+    description: >
+      Ethereum JSON-RPC compatible proxy endpoints for standard methods
+      including eth_blockNumber, eth_getBlockByNumber, eth_getTransactionByHash,
+      eth_getTransactionReceipt, eth_call, eth_gasPrice, and eth_estimateGas.
+    image: https://snowtrace.io/favicon.ico
+    humanURL: https://snowtrace.io/documentation
+    baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+    tags:
+      - RPC
+      - Proxy
+      - Ethereum
+      - JSON-RPC
+    properties:
+      - type: Documentation
+        url: https://snowtrace.io/documentation
+  - name: Routescan Nametags API
+    description: >
+      Retrieve address labels and nametags applied to known wallets,
+      contracts, and entities indexed by Routescan across all supported
+      EVM chains.
+    image: https://snowtrace.io/favicon.ico
+    humanURL: https://snowtrace.io/documentation
+    baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+    tags:
+      - Labels
+      - Nametags
+      - Addresses
+    properties:
+      - type: Documentation
+        url: https://snowtrace.io/documentation
+common:
+  - type: Portal
+    url: https://snowtrace.io/
+  - type: Documentation
+    url: https://snowtrace.io/documentation
+  - type: Plans
+    url: https://snowtrace.io/documentation
+  - type: SignUp
+    url: https://routescan.io/
+  - type: Contact
+    url: https://snowtrace.io/contactus
+  - type: TermsOfService
+    url: https://snowtrace.io/
+  - type: Status
+    url: https://snowtrace.io/
+  - type: Plans
+    url: /plans/plans.yml
+  - type: RateLimits
+    url: /rate-limits/rate-limits.yml
+  - type: FinOps
+    url: /finops/finops.yml
+maintainers:
+  - FN: Routescan
+    url: https://routescan.io/
+    email: ""

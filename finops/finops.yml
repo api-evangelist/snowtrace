@@ -1,0 +1,67 @@
+finops:
+  provider: Routescan (Snowtrace)
+  url: https://snowtrace.io/documentation
+  summary: >
+    Routescan offers a free tier with no credit card required, making it
+    accessible for individual developers and small projects. Paid plans are
+    billed monthly with optional quarterly (15% discount) and annual
+    (20% discount) billing cycles. There is no per-call billing on any plan;
+    all plans carry flat monthly fees with daily call caps and per-second
+    rate limits.
+  freetier:
+    available: true
+    keyRequired: false
+    rateLimit: 2 requests/second
+    dailyCap: 10000
+    notes: >
+      Anonymous free tier requires no registration. A registered free key
+      raises limits to 5 req/s and 100,000 calls/day but requires attribution
+      for public applications.
+  pricing:
+    model: flat-rate
+    billingOptions:
+      - cycle: monthly
+        discount: 0%
+      - cycle: quarterly
+        discount: 15%
+      - cycle: yearly
+        discount: 20%
+    tiers:
+      - name: Free (Registered)
+        monthlyUSD: 0
+        rps: 5
+        dailyCalls: 100000
+      - name: Standard
+        monthlyUSD: 160
+        rps: 10
+        dailyCalls: 200000
+      - name: Advanced
+        monthlyUSD: 240
+        rps: 20
+        dailyCalls: 500000
+      - name: Professional
+        monthlyUSD: 320
+        rps: 30
+        dailyCalls: 1000000
+      - name: Pro Plus
+        monthlyUSD: 440
+        rps: 30
+        dailyCalls: 1500000
+  costDrivers:
+    - name: Daily API call volume
+      description: >
+        Primary cost driver is daily call volume. Higher daily caps require
+        upgrade to a paid plan.
+    - name: Request throughput
+      description: >
+        Seconds-level burst needs (>5 req/s) require a paid Standard plan
+        or above.
+    - name: Multichain access
+      description: >
+        All plans (including free) include access to all 40+ indexed EVM
+        chains under a single API key with no per-chain surcharge.
+  notes: >
+    Contract verification is capped at 250 submissions/day across all plans.
+    Free plan public use requires attribution. No SLA guarantees on free tier;
+    paid plans include priority support. The API is described as a community
+    service provided "without warranty."

@@ -1,0 +1,46 @@
+rateLimits:
+  - plan: Free (No Key)
+    requestsPerSecond: 2
+    requestsPerDay: 10000
+    notes: >
+      No API key required. Anonymous access capped at 2 calls/second and
+      10,000 calls per day across all endpoints.
+  - plan: Free (Registered)
+    requestsPerSecond: 5
+    requestsPerDay: 100000
+    notes: >
+      Free API key issued after registering at routescan.io. Attribution
+      ("Powered by Routescan.io APIs" or backlink) required for public-facing
+      applications.
+  - plan: Standard
+    requestsPerSecond: 10
+    requestsPerDay: 200000
+    notes: >
+      Paid plan ($160/month). Annual and quarterly discounts available
+      (20% yearly, 15% quarterly).
+  - plan: Advanced
+    requestsPerSecond: 20
+    requestsPerDay: 500000
+    notes: >
+      Paid plan ($240/month). Annual and quarterly discounts available.
+  - plan: Professional
+    requestsPerSecond: 30
+    requestsPerDay: 1000000
+    notes: >
+      Paid plan ($320/month). Annual and quarterly discounts available.
+  - plan: Pro Plus
+    requestsPerSecond: 30
+    requestsPerDay: 1500000
+    notes: >
+      Paid plan ($440/month). Same request-per-second ceiling as Professional
+      but higher daily call allowance. Annual and quarterly discounts available.
+  - global:
+    contractVerification:
+      requestsPerDay: 250
+      notes: >
+        Contract source code verification via POST is capped at 250
+        submissions per day regardless of plan.
+    multichain:
+      notes: >
+        A single API key provides access to all 40+ indexed EVM chains.
+        Per-chain rate limits apply within the same global quota.
