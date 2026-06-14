@@ -1,0 +1,31 @@
+{
+  "summary": "Get event logs for a contract address using topic filtering",
+  "request": {
+    "method": "GET",
+    "url": "https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan/api?module=logs&action=getLogs&address=0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6&startblock=33000000&endblock=33100000&topic0=0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef&page=1&offset=10&apikey=placeholder"
+  },
+  "response": {
+    "status": "1",
+    "message": "OK",
+    "result": [
+      {
+        "address": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6",
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x000000000000000000000000742d35cc6634c0532925a3b844bc454e4438f44e",
+          "0x000000000000000000000000recipientaddress00000000000000000000000"
+        ],
+        "data": "0x000000000000000000000000000000000000000000000000000000002FAF0800",
+        "blockNumber": "0x1F7E380",
+        "blockHash": "0xblockhash222222222222222222222222222222222222222222222222222222",
+        "timeStamp": "0x655F3440",
+        "gasPrice": "0x5D21DBA00",
+        "gasUsed": "0xCA70",
+        "logIndex": "0x3",
+        "transactionHash": "0xlogtxhash0000000000000000000000000000000000000000000000000000",
+        "transactionIndex": "0x7"
+      }
+    ]
+  },
+  "notes": "topic0 0xddf252ad... is the keccak256 hash of the ERC-20 Transfer(address,address,uint256) event signature."
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://snowtrace.io/schemas/api-response",
+  "title": "Routescan API Response Envelope",
+  "description": "Standard response envelope returned by all Routescan Etherscan-compatible API endpoints.",
+  "type": "object",
+  "required": ["status", "message", "result"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["0", "1"],
+      "description": "1 indicates a successful call; 0 indicates an error."
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable status string. OK on success, NOTOK on error.",
+      "examples": ["OK", "NOTOK", "No transactions found"]
+    },
+    "result": {
+      "description": "Response payload. Type varies by endpoint — may be a string, object, or array."
+    }
+  },
+  "additionalProperties": false
+}

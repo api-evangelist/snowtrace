@@ -1,0 +1,1601 @@
+openapi: 3.1.0
+info:
+  title: Routescan (Snowtrace) Etherscan-Compatible API
+  description: >
+    Routescan is the first multichain ecosystem explorer, search, API, and
+    analytics platform for all major EVM chains. Operating as Snowtrace for
+    Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with
+    the Etherscan API format, delivering near real-time access to transactions,
+    token transfers, smart contract data, and event logs across Avalanche C-Chain,
+    Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants
+    multichain access across all indexed chains.
+  version: "2.0"
+  contact:
+    name: Routescan Support
+    url: https://snowtrace.io/contactus
+  termsOfService: https://snowtrace.io/
+servers:
+  - url: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+    description: Routescan Multichain API (mainnet)
+    variables:
+      chainId:
+        default: "43114"
+        description: >
+          EVM chain ID. Use 43114 for Avalanche C-Chain mainnet,
+          43113 for Avalanche Fuji testnet.
+  - url: https://api.routescan.io/v2/network/testnet/evm/{chainId}/etherscan/api
+    description: Routescan Multichain API (testnet)
+    variables:
+      chainId:
+        default: "43113"
+        description: EVM chain ID for testnet networks.
+security:
+  - apiKey: []
+  - {}
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
+      description: >
+        Optional for free-tier usage (2 req/s, 10,000 calls/day). Register at
+        routescan.io for increased limits.
+  parameters:
+    moduleParam:
+      name: module
+      in: query
+      required: true
+      schema:
+        type: string
+      description: API module name (account, block, contract, logs, token, stats, transaction, proxy).
+    actionParam:
+      name: action
+      in: query
+      required: true
+      schema:
+        type: string
+      description: API action within the module.
+    apikeyParam:
+      name: apikey
+      in: query
+      required: false
+      schema:
+        type: string
+      description: API key for authenticated access. Use "placeholder" for free tier.
+    addressParam:
+      name: address
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars).
+    pageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number for paginated results.
+    offsetParam:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of results per page (max 10000).
+    startblockParam:
+      name: startblock
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+      description: Starting block number for block-range queries.
+    endblockParam:
+      name: endblock
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 99999999
+      description: Ending block number for block-range queries.
+    sortParam:
+      name: sort
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [asc, desc]
+        default: asc
+      description: Sort order for results (ascending or descending).
+    tagParam:
+      name: tag
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [earliest, pending, latest]
+        default: latest
+      description: Pre-defined block parameter for balance queries.
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: ["0", "1"]
+          description: "1 for success, 0 for error."
+        message:
+          type: string
+          description: Human-readable status message (OK or NOTOK).
+        result:
+          description: The response payload (varies by endpoint).
+      required: [status, message, result]
+    TransactionItem:
+      type: object
+      properties:
+        blockNumber:
+          type: string
+        timeStamp:
+          type: string
+        hash:
+          type: string
+        nonce:
+          type: string
+        blockHash:
+          type: string
+        transactionIndex:
+          type: string
+        from:
+          type: string
+        to:
+          type: string
+        value:
+          type: string
+        gas:
+          type: string
+        gasPrice:
+          type: string
+        isError:
+          type: string
+        txreceipt_status:
+          type: string
+        input:
+          type: string
+        contractAddress:
+          type: string
+        cumulativeGasUsed:
+          type: string
+        gasUsed:
+          type: string
+        confirmations:
+          type: string
+        methodId:
+          type: string
+        functionName:
+          type: string
+    TokenTransferItem:
+      type: object
+      properties:
+        blockNumber:
+          type: string
+        timeStamp:
+          type: string
+        hash:
+          type: string
+        nonce:
+          type: string
+        blockHash:
+          type: string
+        from:
+          type: string
+        contractAddress:
+          type: string
+        to:
+          type: string
+        value:
+          type: string
+        tokenName:
+          type: string
+        tokenSymbol:
+          type: string
+        tokenDecimal:
+          type: string
+        transactionIndex:
+          type: string
+        gas:
+          type: string
+        gasPrice:
+          type: string
+        gasUsed:
+          type: string
+        cumulativeGasUsed:
+          type: string
+        confirmations:
+          type: string
+    LogItem:
+      type: object
+      properties:
+        address:
+          type: string
+        topics:
+          type: array
+          items:
+            type: string
+        data:
+          type: string
+        blockNumber:
+          type: string
+        blockHash:
+          type: string
+        timeStamp:
+          type: string
+        gasPrice:
+          type: string
+        gasUsed:
+          type: string
+        logIndex:
+          type: string
+        transactionHash:
+          type: string
+        transactionIndex:
+          type: string
+paths:
+  # ─── ACCOUNTS ───────────────────────────────────────────────────
+  /account/balance:
+    get:
+      operationId: getBalance
+      summary: Get native balance for a single address
+      description: >
+        Returns the native token (AVAX, ETH, etc.) balance of a given
+        address at the latest block.
+      tags: [Accounts]
+      parameters:
+        - $ref: '#/components/parameters/moduleParam'
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [account]
+        - $ref: '#/components/parameters/actionParam'
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [balance]
+        - $ref: '#/components/parameters/addressParam'
+        - $ref: '#/components/parameters/tagParam'
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Address balance in Wei
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+                        example: "1234567890000000000"
+              example:
+                status: "1"
+                message: "OK"
+                result: "1234567890000000000"
+  /account/balancemulti:
+    get:
+      operationId: getBalanceMulti
+      summary: Get native balance for multiple addresses
+      description: >
+        Returns the native token balance for up to 20 addresses in a single
+        call. Pass addresses as a comma-separated list.
+      tags: [Accounts]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [account]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [balancemulti]
+        - name: address
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Comma-separated list of up to 20 addresses.
+        - $ref: '#/components/parameters/tagParam'
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Array of address/balance pairs
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            account:
+                              type: string
+                            balance:
+                              type: string
+  /account/txlist:
+    get:
+      operationId: getNormalTransactions
+      summary: Get normal transactions by address
+      description: >
+        Returns a list of normal (external) transactions performed by an
+        address. Supports block range filtering and pagination.
+      tags: [Accounts]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [account]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [txlist]
+        - $ref: '#/components/parameters/addressParam'
+        - $ref: '#/components/parameters/startblockParam'
+        - $ref: '#/components/parameters/endblockParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: List of normal transactions
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/TransactionItem'
+  /account/txlistinternal:
+    get:
+      operationId: getInternalTransactions
+      summary: Get internal transactions by address or transaction hash
+      description: >
+        Returns internal (EVM-level) transactions for a given address or
+        a specific transaction hash. Optionally filter by block range.
+      tags: [Accounts]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [account]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [txlistinternal]
+        - name: address
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Wallet or contract address (use with startblock/endblock).
+        - name: txhash
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Transaction hash to retrieve internal txns for.
+        - $ref: '#/components/parameters/startblockParam'
+        - $ref: '#/components/parameters/endblockParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: List of internal transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /account/tokentx:
+    get:
+      operationId: getERC20Transfers
+      summary: Get ERC-20 token transfer events by address
+      description: >
+        Returns a list of ERC-20 token transfer events for a given address.
+        Optionally filter by token contract address and block range.
+      tags: [Accounts]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [account]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [tokentx]
+        - $ref: '#/components/parameters/addressParam'
+        - name: contractaddress
+          in: query
+          required: false
+          schema:
+            type: string
+          description: ERC-20 contract address to filter transfers.
+        - $ref: '#/components/parameters/startblockParam'
+        - $ref: '#/components/parameters/endblockParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: List of ERC-20 token transfers
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/TokenTransferItem'
+  /account/tokennfttx:
+    get:
+      operationId: getERC721Transfers
+      summary: Get ERC-721 NFT transfer events by address
+      description: >
+        Returns a list of ERC-721 (NFT) token transfer events for a given
+        address. Optionally filter by NFT contract address and block range.
+      tags: [Accounts]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [account]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [tokennfttx]
+        - $ref: '#/components/parameters/addressParam'
+        - name: contractaddress
+          in: query
+          required: false
+          schema:
+            type: string
+          description: ERC-721 contract address to filter transfers.
+        - $ref: '#/components/parameters/startblockParam'
+        - $ref: '#/components/parameters/endblockParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: List of ERC-721 NFT transfers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /account/token1155tx:
+    get:
+      operationId: getERC1155Transfers
+      summary: Get ERC-1155 token transfer events by address
+      description: >
+        Returns a list of ERC-1155 multi-token transfer events for a given
+        address. Optionally filter by token contract address and block range.
+      tags: [Accounts]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [account]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [token1155tx]
+        - $ref: '#/components/parameters/addressParam'
+        - name: contractaddress
+          in: query
+          required: false
+          schema:
+            type: string
+          description: ERC-1155 contract address to filter transfers.
+        - $ref: '#/components/parameters/startblockParam'
+        - $ref: '#/components/parameters/endblockParam'
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/sortParam'
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: List of ERC-1155 token transfers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /account/balancehistory:
+    get:
+      operationId: getHistoricalBalance
+      summary: Get historical balance at a specific block
+      description: >
+        Returns the native token balance of an address at a specific block
+        number.
+      tags: [Accounts]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [account]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [balancehistory]
+        - $ref: '#/components/parameters/addressParam'
+        - name: blockno
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Block number at which to retrieve the balance.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Historical balance in Wei
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+  # ─── BLOCKS ──────────────────────────────────────────────────────
+  /block/getblockreward:
+    get:
+      operationId: getBlockReward
+      summary: Get block reward by block number
+      description: >
+        Returns the block and uncle rewards for a given block number.
+      tags: [Blocks]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [block]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [getblockreward]
+        - name: blockno
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Target block number.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Block reward details
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: object
+                        properties:
+                          blockNumber:
+                            type: string
+                          timeStamp:
+                            type: string
+                          blockMiner:
+                            type: string
+                          blockReward:
+                            type: string
+                          uncles:
+                            type: array
+                            items:
+                              type: object
+                          uncleInclusionReward:
+                            type: string
+  /block/getblockcountdown:
+    get:
+      operationId: getBlockCountdown
+      summary: Get estimated time remaining for a block
+      description: >
+        Returns the estimated time remaining (in seconds) and block count
+        until a given block number is reached.
+      tags: [Blocks]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [block]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [getblockcountdown]
+        - name: blockno
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Target block number.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Block countdown details
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: object
+                        properties:
+                          CurrentBlock:
+                            type: string
+                          CountdownBlock:
+                            type: string
+                          RemainingBlock:
+                            type: string
+                          EstimateTimeInSec:
+                            type: string
+  # ─── CONTRACTS ───────────────────────────────────────────────────
+  /contract/getabi:
+    get:
+      operationId: getContractABI
+      summary: Get contract ABI
+      description: >
+        Returns the ABI (Application Binary Interface) for a verified
+        smart contract.
+      tags: [Contracts]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [contract]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [getabi]
+        - $ref: '#/components/parameters/addressParam'
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Contract ABI as JSON string
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+                        description: JSON-encoded ABI array.
+  /contract/getsourcecode:
+    get:
+      operationId: getContractSourceCode
+      summary: Get contract source code
+      description: >
+        Returns the Solidity source code and compilation metadata for a
+        verified smart contract.
+      tags: [Contracts]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [contract]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [getsourcecode]
+        - $ref: '#/components/parameters/addressParam'
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Contract source code details
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            SourceCode:
+                              type: string
+                            ABI:
+                              type: string
+                            ContractName:
+                              type: string
+                            CompilerVersion:
+                              type: string
+                            OptimizationUsed:
+                              type: string
+                            Runs:
+                              type: string
+                            ConstructorArguments:
+                              type: string
+                            EVMVersion:
+                              type: string
+                            Library:
+                              type: string
+                            LicenseType:
+                              type: string
+                            Proxy:
+                              type: string
+                            Implementation:
+                              type: string
+                            SwaggerVersion:
+                              type: string
+  /contract/getcontractcreation:
+    get:
+      operationId: getContractCreation
+      summary: Get contract creator and creation transaction
+      description: >
+        Returns the creator address and creation transaction hash for up
+        to 5 smart contract addresses.
+      tags: [Contracts]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [contract]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [getcontractcreation]
+        - name: contractaddresses
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Comma-separated list of up to 5 contract addresses.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Contract creation details
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            contractAddress:
+                              type: string
+                            contractCreator:
+                              type: string
+                            txHash:
+                              type: string
+  /contract/verifysourcecode:
+    post:
+      operationId: verifySourceCode
+      summary: Verify smart contract source code
+      description: >
+        Submits a smart contract's Solidity source code for verification.
+        Limited to 250 verifications per day. Returns a GUID for status polling.
+      tags: [Contracts]
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - module
+                - action
+                - contractaddress
+                - sourceCode
+                - codeformat
+                - contractname
+                - compilerversion
+              properties:
+                module:
+                  type: string
+                  enum: [contract]
+                action:
+                  type: string
+                  enum: [verifysourcecode]
+                contractaddress:
+                  type: string
+                  description: The deployed contract address.
+                sourceCode:
+                  type: string
+                  description: Solidity source code.
+                codeformat:
+                  type: string
+                  enum: [solidity-single-file, solidity-standard-json-input]
+                contractname:
+                  type: string
+                compilerversion:
+                  type: string
+                  example: v0.8.19+commit.7dd6d404
+                optimizationUsed:
+                  type: integer
+                  enum: [0, 1]
+                runs:
+                  type: integer
+                constructorArguments:
+                  type: string
+                evmversion:
+                  type: string
+                licenseType:
+                  type: integer
+                  description: "SPDX license ID (e.g. 3=MIT, 5=GPL-2.0, etc.)"
+                apikey:
+                  type: string
+      responses:
+        "200":
+          description: Verification submission GUID
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+                        description: GUID to use with checkverifystatus.
+  /contract/checkverifystatus:
+    get:
+      operationId: checkVerifyStatus
+      summary: Check verification submission status
+      description: >
+        Polls the status of a contract source code verification submission
+        using the GUID returned by verifysourcecode.
+      tags: [Contracts]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [contract]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [checkverifystatus]
+        - name: guid
+          in: query
+          required: true
+          schema:
+            type: string
+          description: GUID returned from the verifysourcecode submission.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Verification status
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+                        description: "Pass: Verified or Pending in queue or Fail: reason."
+  # ─── LOGS ────────────────────────────────────────────────────────
+  /logs/getLogs:
+    get:
+      operationId: getLogs
+      summary: Get event logs by address and topics
+      description: >
+        Returns event logs emitted by a smart contract address, filtered by
+        block range and up to four indexed topics.
+      tags: [Logs]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [logs]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [getLogs]
+        - name: address
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Contract address to filter logs.
+        - $ref: '#/components/parameters/startblockParam'
+        - $ref: '#/components/parameters/endblockParam'
+        - name: topic0
+          in: query
+          required: false
+          schema:
+            type: string
+          description: First indexed event topic (event signature hash).
+        - name: topic1
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Second indexed event topic.
+        - name: topic2
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Third indexed event topic.
+        - name: topic3
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Fourth indexed event topic.
+        - name: topic0_1_opr
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [and, or]
+          description: Logical operator between topic0 and topic1.
+        - $ref: '#/components/parameters/pageParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: List of event logs
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LogItem'
+  # ─── TOKENS ──────────────────────────────────────────────────────
+  /token/tokensupply:
+    get:
+      operationId: getTokenSupply
+      summary: Get ERC-20 token total supply
+      description: >
+        Returns the total supply of an ERC-20 token by its contract address.
+      tags: [Tokens]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [stats]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [tokensupply]
+        - name: contractaddress
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ERC-20 token contract address.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Token total supply
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+  /token/tokenholdercount:
+    get:
+      operationId: getTokenHolderCount
+      summary: Get ERC-20 token holder count
+      description: >
+        Returns the number of unique holders for an ERC-20 token contract.
+      tags: [Tokens]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [token]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [tokenholdercount]
+        - name: contractaddress
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ERC-20 token contract address.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Token holder count
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+  # ─── STATS ───────────────────────────────────────────────────────
+  /stats/avaxsupply:
+    get:
+      operationId: getAvaxSupply
+      summary: Get total AVAX supply
+      description: >
+        Returns the total supply of AVAX in Wei on the Avalanche C-Chain.
+      tags: [Stats]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [stats]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [avaxsupply]
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Total AVAX supply in Wei
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+  /stats/avaxprice:
+    get:
+      operationId: getAvaxPrice
+      summary: Get last AVAX price in USD and BTC
+      description: >
+        Returns the latest AVAX price denominated in both USD and BTC.
+      tags: [Stats]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [stats]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [avaxprice]
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: AVAX price data
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: object
+                        properties:
+                          avaxbtc:
+                            type: string
+                          avaxbtc_timestamp:
+                            type: string
+                          avaxusd:
+                            type: string
+                          avaxusd_timestamp:
+                            type: string
+  # ─── TRANSACTIONS ────────────────────────────────────────────────
+  /transaction/getstatus:
+    get:
+      operationId: getTransactionStatus
+      summary: Check transaction execution status
+      description: >
+        Returns whether a transaction succeeded or failed during execution
+        (errcode 0 = success, 1 = failure).
+      tags: [Transactions]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [transaction]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [getstatus]
+        - name: txhash
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Transaction hash to check.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Transaction execution status
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: object
+                        properties:
+                          isError:
+                            type: string
+                            enum: ["0", "1"]
+                          errDescription:
+                            type: string
+  /transaction/gettxreceiptstatus:
+    get:
+      operationId: getTransactionReceiptStatus
+      summary: Check transaction receipt status
+      description: >
+        Returns the status from the transaction receipt (1 = success, 0 = fail).
+        Only applicable to post-Byzantium transactions.
+      tags: [Transactions]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [transaction]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [gettxreceiptstatus]
+        - name: txhash
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Transaction hash to check.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Transaction receipt status
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: object
+                        properties:
+                          status:
+                            type: string
+                            enum: ["0", "1"]
+  # ─── PROXY (Geth/Parity JSON-RPC) ───────────────────────────────
+  /proxy/eth_blockNumber:
+    get:
+      operationId: proxyEthBlockNumber
+      summary: Get most recent block number (eth_blockNumber)
+      description: >
+        Proxies the eth_blockNumber JSON-RPC method and returns the number
+        of the most recent block in hex.
+      tags: [Proxy]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [proxy]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [eth_blockNumber]
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Current block number in hex
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+                        example: "0x10d4f"
+  /proxy/eth_getBlockByNumber:
+    get:
+      operationId: proxyEthGetBlockByNumber
+      summary: Get block information by block number (eth_getBlockByNumber)
+      description: >
+        Proxies the eth_getBlockByNumber JSON-RPC method. Returns block
+        details for the given block tag or number.
+      tags: [Proxy]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [proxy]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [eth_getBlockByNumber]
+        - name: tag
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Block number in hex or one of latest/earliest/pending.
+        - name: boolean
+          in: query
+          required: true
+          schema:
+            type: boolean
+          description: "true to return full transaction objects; false for hashes only."
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Block object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /proxy/eth_getTransactionByHash:
+    get:
+      operationId: proxyEthGetTransactionByHash
+      summary: Get transaction by hash (eth_getTransactionByHash)
+      description: >
+        Proxies the eth_getTransactionByHash JSON-RPC method. Returns
+        transaction details for the given hash.
+      tags: [Proxy]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [proxy]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [eth_getTransactionByHash]
+        - name: txhash
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Transaction hash.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Transaction object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /proxy/eth_getTransactionReceipt:
+    get:
+      operationId: proxyEthGetTransactionReceipt
+      summary: Get transaction receipt (eth_getTransactionReceipt)
+      description: >
+        Proxies the eth_getTransactionReceipt JSON-RPC method. Returns the
+        receipt for a mined transaction.
+      tags: [Proxy]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [proxy]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [eth_getTransactionReceipt]
+        - name: txhash
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Transaction hash.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Transaction receipt object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /proxy/eth_call:
+    get:
+      operationId: proxyEthCall
+      summary: Execute contract call (eth_call)
+      description: >
+        Proxies the eth_call JSON-RPC method. Executes a message call
+        transaction without creating a transaction on the blockchain.
+      tags: [Proxy]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [proxy]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [eth_call]
+        - name: to
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Contract address to call.
+        - name: data
+          in: query
+          required: true
+          schema:
+            type: string
+          description: ABI-encoded call data.
+        - name: tag
+          in: query
+          required: false
+          schema:
+            type: string
+            default: latest
+          description: Block parameter for the call.
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Call result in hex
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+  /proxy/eth_gasPrice:
+    get:
+      operationId: proxyEthGasPrice
+      summary: Get current gas price (eth_gasPrice)
+      description: >
+        Proxies the eth_gasPrice JSON-RPC method. Returns the current gas
+        price in Wei (hex-encoded).
+      tags: [Proxy]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [proxy]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [eth_gasPrice]
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Current gas price in Wei
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+  /proxy/eth_estimateGas:
+    get:
+      operationId: proxyEthEstimateGas
+      summary: Estimate gas for a transaction (eth_estimateGas)
+      description: >
+        Proxies the eth_estimateGas JSON-RPC method. Returns an estimate of
+        the gas needed to execute the given transaction.
+      tags: [Proxy]
+      parameters:
+        - name: module
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [proxy]
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [eth_estimateGas]
+        - name: to
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Target address for the transaction.
+        - name: data
+          in: query
+          required: false
+          schema:
+            type: string
+          description: ABI-encoded call data.
+        - name: value
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Value in Wei to transfer.
+        - name: gas
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Gas limit in hex.
+        - name: gasPrice
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Gas price in Wei (hex).
+        - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        "200":
+          description: Estimated gas in hex
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      result:
+                        type: string
+tags:
+  - name: Accounts
+    description: Address balance and transaction history endpoints.
+  - name: Blocks
+    description: Block rewards and countdown endpoints.
+  - name: Contracts
+    description: Smart contract ABI, source code, and verification endpoints.
+  - name: Logs
+    description: Smart contract event log query endpoints.
+  - name: Tokens
+    description: ERC-20 token supply and holder endpoints.
+  - name: Stats
+    description: Network statistics including token supply and prices.
+  - name: Transactions
+    description: Transaction execution and receipt status endpoints.
+  - name: Proxy
+    description: Ethereum JSON-RPC compatible proxy endpoints.

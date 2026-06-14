@@ -170,6 +170,8 @@ apis:
       - type: Documentation
         url: https://snowtrace.io/documentation
 common:
+  - type: OpenAPI
+    url: /openapi/openapi.yml
   - type: Portal
     url: https://snowtrace.io/
   - type: Documentation

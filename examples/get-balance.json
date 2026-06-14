@@ -1,0 +1,13 @@
+{
+  "summary": "Get native AVAX balance for a single address on Avalanche C-Chain",
+  "request": {
+    "method": "GET",
+    "url": "https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan/api?module=account&action=balance&address=0x742d35Cc6634C0532925a3b844Bc454e4438f44e&tag=latest&apikey=placeholder"
+  },
+  "response": {
+    "status": "1",
+    "message": "OK",
+    "result": "12450000000000000000"
+  },
+  "notes": "Result is returned in Wei. Divide by 1e18 to convert to AVAX (12.45 AVAX)."
+}

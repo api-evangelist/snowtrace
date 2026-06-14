@@ -1,0 +1,34 @@
+{
+  "summary": "Get ERC-20 token transfers for an address on Avalanche C-Chain",
+  "request": {
+    "method": "GET",
+    "url": "https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan/api?module=account&action=tokentx&address=0x742d35Cc6634C0532925a3b844Bc454e4438f44e&contractaddress=0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6&page=1&offset=10&startblock=0&endblock=99999999&sort=asc&apikey=placeholder"
+  },
+  "response": {
+    "status": "1",
+    "message": "OK",
+    "result": [
+      {
+        "blockNumber": "33000000",
+        "timeStamp": "1701000000",
+        "hash": "0xerc20transferhash000000000000000000000000000000000000000000000",
+        "nonce": "12",
+        "blockHash": "0xblockhash111111111111111111111111111111111111111111111111111111",
+        "from": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+        "contractAddress": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6",
+        "to": "0xRecipientAddress000000000000000000000000",
+        "value": "50000000",
+        "tokenName": "USD Coin",
+        "tokenSymbol": "USDC",
+        "tokenDecimal": "6",
+        "transactionIndex": "7",
+        "gas": "65000",
+        "gasPrice": "25000000000",
+        "gasUsed": "52000",
+        "cumulativeGasUsed": "156000",
+        "confirmations": "90000"
+      }
+    ]
+  },
+  "notes": "USDC on Avalanche C-Chain has 6 decimals. Divide value by 1e6 to get human-readable amount (50 USDC)."
+}

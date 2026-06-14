@@ -1,0 +1,13 @@
+{
+  "summary": "Get ABI for a verified smart contract on Avalanche C-Chain",
+  "request": {
+    "method": "GET",
+    "url": "https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan/api?module=contract&action=getabi&address=0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6&apikey=placeholder"
+  },
+  "response": {
+    "status": "1",
+    "message": "OK",
+    "result": "[{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]"
+  },
+  "notes": "Result is a JSON string that must be parsed. Only available for verified contracts."
+}

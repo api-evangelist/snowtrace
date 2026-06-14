@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://snowtrace.io/schemas/token-transfer",
+  "title": "Routescan Token Transfer",
+  "description": "Represents a token transfer event (ERC-20, ERC-721, or ERC-1155) returned by the tokentx, tokennfttx, and token1155tx actions.",
+  "type": "object",
+  "properties": {
+    "blockNumber": {
+      "type": "string",
+      "description": "Block number of the transfer."
+    },
+    "timeStamp": {
+      "type": "string",
+      "description": "Unix timestamp of the block."
+    },
+    "hash": {
+      "type": "string",
+      "description": "Transaction hash."
+    },
+    "nonce": {
+      "type": "string",
+      "description": "Sender nonce."
+    },
+    "blockHash": {
+      "type": "string",
+      "description": "Block hash."
+    },
+    "from": {
+      "type": "string",
+      "description": "Sender address."
+    },
+    "contractAddress": {
+      "type": "string",
+      "description": "Token contract address."
+    },
+    "to": {
+      "type": "string",
+      "description": "Recipient address."
+    },
+    "value": {
+      "type": "string",
+      "description": "Amount transferred (for ERC-20) or token count (for ERC-1155). Empty for ERC-721."
+    },
+    "tokenID": {
+      "type": "string",
+      "description": "Token ID for ERC-721 and ERC-1155 transfers."
+    },
+    "tokenName": {
+      "type": "string",
+      "description": "Token name."
+    },
+    "tokenSymbol": {
+      "type": "string",
+      "description": "Token ticker symbol."
+    },
+    "tokenDecimal": {
+      "type": "string",
+      "description": "Decimal places for the token (ERC-20 only)."
+    },
+    "transactionIndex": {
+      "type": "string",
+      "description": "Transaction index within the block."
+    },
+    "gas": {
+      "type": "string",
+      "description": "Gas limit."
+    },
+    "gasPrice": {
+      "type": "string",
+      "description": "Gas price in Wei."
+    },
+    "gasUsed": {
+      "type": "string",
+      "description": "Gas consumed."
+    },
+    "cumulativeGasUsed": {
+      "type": "string",
+      "description": "Cumulative gas used in the block."
+    },
+    "confirmations": {
+      "type": "string",
+      "description": "Block confirmations."
+    }
+  },
+  "additionalProperties": true
+}

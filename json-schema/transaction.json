@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://snowtrace.io/schemas/transaction",
+  "title": "Routescan Transaction",
+  "description": "Represents a normal (external) EVM transaction returned by the txlist action.",
+  "type": "object",
+  "properties": {
+    "blockNumber": {
+      "type": "string",
+      "description": "Block number in which the transaction was included."
+    },
+    "timeStamp": {
+      "type": "string",
+      "description": "Unix timestamp of the block."
+    },
+    "hash": {
+      "type": "string",
+      "description": "Transaction hash (0x-prefixed, 66 chars)."
+    },
+    "nonce": {
+      "type": "string",
+      "description": "Sender nonce at the time of this transaction."
+    },
+    "blockHash": {
+      "type": "string",
+      "description": "Hash of the block containing this transaction."
+    },
+    "transactionIndex": {
+      "type": "string",
+      "description": "Position of the transaction within the block."
+    },
+    "from": {
+      "type": "string",
+      "description": "Sender address."
+    },
+    "to": {
+      "type": "string",
+      "description": "Recipient address (empty for contract deployments)."
+    },
+    "value": {
+      "type": "string",
+      "description": "Native token amount transferred in Wei."
+    },
+    "gas": {
+      "type": "string",
+      "description": "Gas limit set by the sender."
+    },
+    "gasPrice": {
+      "type": "string",
+      "description": "Gas price in Wei."
+    },
+    "isError": {
+      "type": "string",
+      "enum": ["0", "1"],
+      "description": "0 if the transaction succeeded; 1 if it reverted."
+    },
+    "txreceipt_status": {
+      "type": "string",
+      "description": "Transaction receipt status (1 = success, 0 = fail). Empty for pre-Byzantium txns."
+    },
+    "input": {
+      "type": "string",
+      "description": "Hex-encoded call data."
+    },
+    "contractAddress": {
+      "type": "string",
+      "description": "Address of the created contract, if this was a deployment transaction."
+    },
+    "cumulativeGasUsed": {
+      "type": "string",
+      "description": "Cumulative gas used in the block up to and including this transaction."
+    },
+    "gasUsed": {
+      "type": "string",
+      "description": "Actual gas consumed by this transaction."
+    },
+    "confirmations": {
+      "type": "string",
+      "description": "Number of block confirmations since this transaction was included."
+    },
+    "methodId": {
+      "type": "string",
+      "description": "First 4 bytes of the call data (function selector)."
+    },
+    "functionName": {
+      "type": "string",
+      "description": "Decoded function name from the ABI if available."
+    }
+  },
+  "additionalProperties": true
+}
