@@ -170,6 +170,10 @@ apis:
       - type: Documentation
         url: https://snowtrace.io/documentation
 common:
+  - type: DomainSecurity
+    url: security/snowtrace-domain-security.yml
+  - type: Authentication
+    url: authentication/snowtrace-authentication.yml
   - type: OpenAPI
     url: /openapi/openapi.yml
   - type: Portal

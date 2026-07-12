@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: apikey
+  description: Optional for free-tier usage (2 req/s, 10,000 calls/day). Register at routescan.io
+    for increased limits.
+  sources:
+  - openapi/openapi.yml
