@@ -1,0 +1,355 @@
+openapi: 3.1.0
+info:
+  title: Routescan (Snowtrace) Etherscan-Compatible Accounts Contracts API
+  description: 'Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.
+
+    '
+  version: '2.0'
+  contact:
+    name: Routescan Support
+    url: https://snowtrace.io/contactus
+  termsOfService: https://snowtrace.io/
+servers:
+- url: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+  description: Routescan Multichain API (mainnet)
+  variables:
+    chainId:
+      default: '43114'
+      description: 'EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.
+
+        '
+- url: https://api.routescan.io/v2/network/testnet/evm/{chainId}/etherscan/api
+  description: Routescan Multichain API (testnet)
+  variables:
+    chainId:
+      default: '43113'
+      description: EVM chain ID for testnet networks.
+security:
+- apiKey: []
+- {}
+tags:
+- name: Contracts
+  description: Smart contract ABI, source code, and verification endpoints.
+paths:
+  /contract/getabi:
+    get:
+      operationId: getContractABI
+      summary: Get contract ABI
+      description: 'Returns the ABI (Application Binary Interface) for a verified smart contract.
+
+        '
+      tags:
+      - Contracts
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - contract
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - getabi
+      - $ref: '#/components/parameters/addressParam'
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Contract ABI as JSON string
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: string
+                      description: JSON-encoded ABI array.
+  /contract/getsourcecode:
+    get:
+      operationId: getContractSourceCode
+      summary: Get contract source code
+      description: 'Returns the Solidity source code and compilation metadata for a verified smart contract.
+
+        '
+      tags:
+      - Contracts
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - contract
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - getsourcecode
+      - $ref: '#/components/parameters/addressParam'
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Contract source code details
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          SourceCode:
+                            type: string
+                          ABI:
+                            type: string
+                          ContractName:
+                            type: string
+                          CompilerVersion:
+                            type: string
+                          OptimizationUsed:
+                            type: string
+                          Runs:
+                            type: string
+                          ConstructorArguments:
+                            type: string
+                          EVMVersion:
+                            type: string
+                          Library:
+                            type: string
+                          LicenseType:
+                            type: string
+                          Proxy:
+                            type: string
+                          Implementation:
+                            type: string
+                          SwaggerVersion:
+                            type: string
+  /contract/getcontractcreation:
+    get:
+      operationId: getContractCreation
+      summary: Get contract creator and creation transaction
+      description: 'Returns the creator address and creation transaction hash for up to 5 smart contract addresses.
+
+        '
+      tags:
+      - Contracts
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - contract
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - getcontractcreation
+      - name: contractaddresses
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Comma-separated list of up to 5 contract addresses.
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Contract creation details
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          contractAddress:
+                            type: string
+                          contractCreator:
+                            type: string
+                          txHash:
+                            type: string
+  /contract/verifysourcecode:
+    post:
+      operationId: verifySourceCode
+      summary: Verify smart contract source code
+      description: 'Submits a smart contract''s Solidity source code for verification. Limited to 250 verifications per day. Returns a GUID for status polling.
+
+        '
+      tags:
+      - Contracts
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - module
+              - action
+              - contractaddress
+              - sourceCode
+              - codeformat
+              - contractname
+              - compilerversion
+              properties:
+                module:
+                  type: string
+                  enum:
+                  - contract
+                action:
+                  type: string
+                  enum:
+                  - verifysourcecode
+                contractaddress:
+                  type: string
+                  description: The deployed contract address.
+                sourceCode:
+                  type: string
+                  description: Solidity source code.
+                codeformat:
+                  type: string
+                  enum:
+                  - solidity-single-file
+                  - solidity-standard-json-input
+                contractname:
+                  type: string
+                compilerversion:
+                  type: string
+                  example: v0.8.19+commit.7dd6d404
+                optimizationUsed:
+                  type: integer
+                  enum:
+                  - 0
+                  - 1
+                runs:
+                  type: integer
+                constructorArguments:
+                  type: string
+                evmversion:
+                  type: string
+                licenseType:
+                  type: integer
+                  description: SPDX license ID (e.g. 3=MIT, 5=GPL-2.0, etc.)
+                apikey:
+                  type: string
+      responses:
+        '200':
+          description: Verification submission GUID
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: string
+                      description: GUID to use with checkverifystatus.
+  /contract/checkverifystatus:
+    get:
+      operationId: checkVerifyStatus
+      summary: Check verification submission status
+      description: 'Polls the status of a contract source code verification submission using the GUID returned by verifysourcecode.
+
+        '
+      tags:
+      - Contracts
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - contract
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - checkverifystatus
+      - name: guid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: GUID returned from the verifysourcecode submission.
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Verification status
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: string
+                      description: 'Pass: Verified or Pending in queue or Fail: reason.'
+components:
+  parameters:
+    addressParam:
+      name: address
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars).
+    apikeyParam:
+      name: apikey
+      in: query
+      required: false
+      schema:
+        type: string
+      description: API key for authenticated access. Use "placeholder" for free tier.
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          description: 1 for success, 0 for error.
+        message:
+          type: string
+          description: Human-readable status message (OK or NOTOK).
+        result:
+          description: The response payload (varies by endpoint).
+      required:
+      - status
+      - message
+      - result
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
+      description: 'Optional for free-tier usage (2 req/s, 10,000 calls/day). Register at routescan.io for increased limits.
+
+        '

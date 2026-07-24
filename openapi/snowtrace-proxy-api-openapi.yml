@@ -1,0 +1,387 @@
+openapi: 3.1.0
+info:
+  title: Routescan (Snowtrace) Etherscan-Compatible Accounts Proxy API
+  description: 'Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.
+
+    '
+  version: '2.0'
+  contact:
+    name: Routescan Support
+    url: https://snowtrace.io/contactus
+  termsOfService: https://snowtrace.io/
+servers:
+- url: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+  description: Routescan Multichain API (mainnet)
+  variables:
+    chainId:
+      default: '43114'
+      description: 'EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.
+
+        '
+- url: https://api.routescan.io/v2/network/testnet/evm/{chainId}/etherscan/api
+  description: Routescan Multichain API (testnet)
+  variables:
+    chainId:
+      default: '43113'
+      description: EVM chain ID for testnet networks.
+security:
+- apiKey: []
+- {}
+tags:
+- name: Proxy
+  description: Ethereum JSON-RPC compatible proxy endpoints.
+paths:
+  /proxy/eth_blockNumber:
+    get:
+      operationId: proxyEthBlockNumber
+      summary: Get most recent block number (eth_blockNumber)
+      description: 'Proxies the eth_blockNumber JSON-RPC method and returns the number of the most recent block in hex.
+
+        '
+      tags:
+      - Proxy
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - proxy
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - eth_blockNumber
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Current block number in hex
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: string
+                      example: '0x10d4f'
+  /proxy/eth_getBlockByNumber:
+    get:
+      operationId: proxyEthGetBlockByNumber
+      summary: Get block information by block number (eth_getBlockByNumber)
+      description: 'Proxies the eth_getBlockByNumber JSON-RPC method. Returns block details for the given block tag or number.
+
+        '
+      tags:
+      - Proxy
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - proxy
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - eth_getBlockByNumber
+      - name: tag
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Block number in hex or one of latest/earliest/pending.
+      - name: boolean
+        in: query
+        required: true
+        schema:
+          type: boolean
+        description: true to return full transaction objects; false for hashes only.
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Block object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /proxy/eth_getTransactionByHash:
+    get:
+      operationId: proxyEthGetTransactionByHash
+      summary: Get transaction by hash (eth_getTransactionByHash)
+      description: 'Proxies the eth_getTransactionByHash JSON-RPC method. Returns transaction details for the given hash.
+
+        '
+      tags:
+      - Proxy
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - proxy
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - eth_getTransactionByHash
+      - name: txhash
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Transaction hash.
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Transaction object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /proxy/eth_getTransactionReceipt:
+    get:
+      operationId: proxyEthGetTransactionReceipt
+      summary: Get transaction receipt (eth_getTransactionReceipt)
+      description: 'Proxies the eth_getTransactionReceipt JSON-RPC method. Returns the receipt for a mined transaction.
+
+        '
+      tags:
+      - Proxy
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - proxy
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - eth_getTransactionReceipt
+      - name: txhash
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Transaction hash.
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Transaction receipt object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /proxy/eth_call:
+    get:
+      operationId: proxyEthCall
+      summary: Execute contract call (eth_call)
+      description: 'Proxies the eth_call JSON-RPC method. Executes a message call transaction without creating a transaction on the blockchain.
+
+        '
+      tags:
+      - Proxy
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - proxy
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - eth_call
+      - name: to
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Contract address to call.
+      - name: data
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ABI-encoded call data.
+      - name: tag
+        in: query
+        required: false
+        schema:
+          type: string
+          default: latest
+        description: Block parameter for the call.
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Call result in hex
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: string
+  /proxy/eth_gasPrice:
+    get:
+      operationId: proxyEthGasPrice
+      summary: Get current gas price (eth_gasPrice)
+      description: 'Proxies the eth_gasPrice JSON-RPC method. Returns the current gas price in Wei (hex-encoded).
+
+        '
+      tags:
+      - Proxy
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - proxy
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - eth_gasPrice
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Current gas price in Wei
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: string
+  /proxy/eth_estimateGas:
+    get:
+      operationId: proxyEthEstimateGas
+      summary: Estimate gas for a transaction (eth_estimateGas)
+      description: 'Proxies the eth_estimateGas JSON-RPC method. Returns an estimate of the gas needed to execute the given transaction.
+
+        '
+      tags:
+      - Proxy
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - proxy
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - eth_estimateGas
+      - name: to
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Target address for the transaction.
+      - name: data
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ABI-encoded call data.
+      - name: value
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Value in Wei to transfer.
+      - name: gas
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Gas limit in hex.
+      - name: gasPrice
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Gas price in Wei (hex).
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Estimated gas in hex
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: string
+components:
+  parameters:
+    apikeyParam:
+      name: apikey
+      in: query
+      required: false
+      schema:
+        type: string
+      description: API key for authenticated access. Use "placeholder" for free tier.
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          description: 1 for success, 0 for error.
+        message:
+          type: string
+          description: Human-readable status message (OK or NOTOK).
+        result:
+          description: The response payload (varies by endpoint).
+      required:
+      - status
+      - message
+      - result
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
+      description: 'Optional for free-tier usage (2 req/s, 10,000 calls/day). Register at routescan.io for increased limits.
+
+        '

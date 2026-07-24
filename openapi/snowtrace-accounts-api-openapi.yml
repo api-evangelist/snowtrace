@@ -1,0 +1,601 @@
+openapi: 3.1.0
+info:
+  title: Routescan (Snowtrace) Etherscan-Compatible Accounts API
+  description: 'Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.
+
+    '
+  version: '2.0'
+  contact:
+    name: Routescan Support
+    url: https://snowtrace.io/contactus
+  termsOfService: https://snowtrace.io/
+servers:
+- url: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+  description: Routescan Multichain API (mainnet)
+  variables:
+    chainId:
+      default: '43114'
+      description: 'EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.
+
+        '
+- url: https://api.routescan.io/v2/network/testnet/evm/{chainId}/etherscan/api
+  description: Routescan Multichain API (testnet)
+  variables:
+    chainId:
+      default: '43113'
+      description: EVM chain ID for testnet networks.
+security:
+- apiKey: []
+- {}
+tags:
+- name: Accounts
+  description: Address balance and transaction history endpoints.
+paths:
+  /account/balance:
+    get:
+      operationId: getBalance
+      summary: Get native balance for a single address
+      description: 'Returns the native token (AVAX, ETH, etc.) balance of a given address at the latest block.
+
+        '
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/moduleParam'
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - account
+      - $ref: '#/components/parameters/actionParam'
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - balance
+      - $ref: '#/components/parameters/addressParam'
+      - $ref: '#/components/parameters/tagParam'
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Address balance in Wei
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: string
+                      example: '1234567890000000000'
+              example:
+                status: '1'
+                message: OK
+                result: '1234567890000000000'
+  /account/balancemulti:
+    get:
+      operationId: getBalanceMulti
+      summary: Get native balance for multiple addresses
+      description: 'Returns the native token balance for up to 20 addresses in a single call. Pass addresses as a comma-separated list.
+
+        '
+      tags:
+      - Accounts
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - account
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - balancemulti
+      - name: address
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Comma-separated list of up to 20 addresses.
+      - $ref: '#/components/parameters/tagParam'
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Array of address/balance pairs
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          account:
+                            type: string
+                          balance:
+                            type: string
+  /account/txlist:
+    get:
+      operationId: getNormalTransactions
+      summary: Get normal transactions by address
+      description: 'Returns a list of normal (external) transactions performed by an address. Supports block range filtering and pagination.
+
+        '
+      tags:
+      - Accounts
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - account
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - txlist
+      - $ref: '#/components/parameters/addressParam'
+      - $ref: '#/components/parameters/startblockParam'
+      - $ref: '#/components/parameters/endblockParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/sortParam'
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: List of normal transactions
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/TransactionItem'
+  /account/txlistinternal:
+    get:
+      operationId: getInternalTransactions
+      summary: Get internal transactions by address or transaction hash
+      description: 'Returns internal (EVM-level) transactions for a given address or a specific transaction hash. Optionally filter by block range.
+
+        '
+      tags:
+      - Accounts
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - account
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - txlistinternal
+      - name: address
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Wallet or contract address (use with startblock/endblock).
+      - name: txhash
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Transaction hash to retrieve internal txns for.
+      - $ref: '#/components/parameters/startblockParam'
+      - $ref: '#/components/parameters/endblockParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/sortParam'
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: List of internal transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /account/tokentx:
+    get:
+      operationId: getERC20Transfers
+      summary: Get ERC-20 token transfer events by address
+      description: 'Returns a list of ERC-20 token transfer events for a given address. Optionally filter by token contract address and block range.
+
+        '
+      tags:
+      - Accounts
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - account
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - tokentx
+      - $ref: '#/components/parameters/addressParam'
+      - name: contractaddress
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ERC-20 contract address to filter transfers.
+      - $ref: '#/components/parameters/startblockParam'
+      - $ref: '#/components/parameters/endblockParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/sortParam'
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: List of ERC-20 token transfers
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/TokenTransferItem'
+  /account/tokennfttx:
+    get:
+      operationId: getERC721Transfers
+      summary: Get ERC-721 NFT transfer events by address
+      description: 'Returns a list of ERC-721 (NFT) token transfer events for a given address. Optionally filter by NFT contract address and block range.
+
+        '
+      tags:
+      - Accounts
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - account
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - tokennfttx
+      - $ref: '#/components/parameters/addressParam'
+      - name: contractaddress
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ERC-721 contract address to filter transfers.
+      - $ref: '#/components/parameters/startblockParam'
+      - $ref: '#/components/parameters/endblockParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/sortParam'
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: List of ERC-721 NFT transfers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /account/token1155tx:
+    get:
+      operationId: getERC1155Transfers
+      summary: Get ERC-1155 token transfer events by address
+      description: 'Returns a list of ERC-1155 multi-token transfer events for a given address. Optionally filter by token contract address and block range.
+
+        '
+      tags:
+      - Accounts
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - account
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - token1155tx
+      - $ref: '#/components/parameters/addressParam'
+      - name: contractaddress
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ERC-1155 contract address to filter transfers.
+      - $ref: '#/components/parameters/startblockParam'
+      - $ref: '#/components/parameters/endblockParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/offsetParam'
+      - $ref: '#/components/parameters/sortParam'
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: List of ERC-1155 token transfers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /account/balancehistory:
+    get:
+      operationId: getHistoricalBalance
+      summary: Get historical balance at a specific block
+      description: 'Returns the native token balance of an address at a specific block number.
+
+        '
+      tags:
+      - Accounts
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - account
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - balancehistory
+      - $ref: '#/components/parameters/addressParam'
+      - name: blockno
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Block number at which to retrieve the balance.
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Historical balance in Wei
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: string
+components:
+  parameters:
+    actionParam:
+      name: action
+      in: query
+      required: true
+      schema:
+        type: string
+      description: API action within the module.
+    tagParam:
+      name: tag
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - earliest
+        - pending
+        - latest
+        default: latest
+      description: Pre-defined block parameter for balance queries.
+    endblockParam:
+      name: endblock
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 99999999
+      description: Ending block number for block-range queries.
+    pageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number for paginated results.
+    apikeyParam:
+      name: apikey
+      in: query
+      required: false
+      schema:
+        type: string
+      description: API key for authenticated access. Use "placeholder" for free tier.
+    moduleParam:
+      name: module
+      in: query
+      required: true
+      schema:
+        type: string
+      description: API module name (account, block, contract, logs, token, stats, transaction, proxy).
+    sortParam:
+      name: sort
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        default: asc
+      description: Sort order for results (ascending or descending).
+    offsetParam:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+      description: Number of results per page (max 10000).
+    addressParam:
+      name: address
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars).
+    startblockParam:
+      name: startblock
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+      description: Starting block number for block-range queries.
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          description: 1 for success, 0 for error.
+        message:
+          type: string
+          description: Human-readable status message (OK or NOTOK).
+        result:
+          description: The response payload (varies by endpoint).
+      required:
+      - status
+      - message
+      - result
+    TransactionItem:
+      type: object
+      properties:
+        blockNumber:
+          type: string
+        timeStamp:
+          type: string
+        hash:
+          type: string
+        nonce:
+          type: string
+        blockHash:
+          type: string
+        transactionIndex:
+          type: string
+        from:
+          type: string
+        to:
+          type: string
+        value:
+          type: string
+        gas:
+          type: string
+        gasPrice:
+          type: string
+        isError:
+          type: string
+        txreceipt_status:
+          type: string
+        input:
+          type: string
+        contractAddress:
+          type: string
+        cumulativeGasUsed:
+          type: string
+        gasUsed:
+          type: string
+        confirmations:
+          type: string
+        methodId:
+          type: string
+        functionName:
+          type: string
+    TokenTransferItem:
+      type: object
+      properties:
+        blockNumber:
+          type: string
+        timeStamp:
+          type: string
+        hash:
+          type: string
+        nonce:
+          type: string
+        blockHash:
+          type: string
+        from:
+          type: string
+        contractAddress:
+          type: string
+        to:
+          type: string
+        value:
+          type: string
+        tokenName:
+          type: string
+        tokenSymbol:
+          type: string
+        tokenDecimal:
+          type: string
+        transactionIndex:
+          type: string
+        gas:
+          type: string
+        gasPrice:
+          type: string
+        gasUsed:
+          type: string
+        cumulativeGasUsed:
+          type: string
+        confirmations:
+          type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
+      description: 'Optional for free-tier usage (2 req/s, 10,000 calls/day). Register at routescan.io for increased limits.
+
+        '

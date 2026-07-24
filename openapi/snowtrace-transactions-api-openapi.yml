@@ -1,0 +1,169 @@
+openapi: 3.1.0
+info:
+  title: Routescan (Snowtrace) Etherscan-Compatible Accounts Transactions API
+  description: 'Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.
+
+    '
+  version: '2.0'
+  contact:
+    name: Routescan Support
+    url: https://snowtrace.io/contactus
+  termsOfService: https://snowtrace.io/
+servers:
+- url: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
+  description: Routescan Multichain API (mainnet)
+  variables:
+    chainId:
+      default: '43114'
+      description: 'EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.
+
+        '
+- url: https://api.routescan.io/v2/network/testnet/evm/{chainId}/etherscan/api
+  description: Routescan Multichain API (testnet)
+  variables:
+    chainId:
+      default: '43113'
+      description: EVM chain ID for testnet networks.
+security:
+- apiKey: []
+- {}
+tags:
+- name: Transactions
+  description: Transaction execution and receipt status endpoints.
+paths:
+  /transaction/getstatus:
+    get:
+      operationId: getTransactionStatus
+      summary: Check transaction execution status
+      description: 'Returns whether a transaction succeeded or failed during execution (errcode 0 = success, 1 = failure).
+
+        '
+      tags:
+      - Transactions
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - transaction
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - getstatus
+      - name: txhash
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Transaction hash to check.
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Transaction execution status
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: object
+                      properties:
+                        isError:
+                          type: string
+                          enum:
+                          - '0'
+                          - '1'
+                        errDescription:
+                          type: string
+  /transaction/gettxreceiptstatus:
+    get:
+      operationId: getTransactionReceiptStatus
+      summary: Check transaction receipt status
+      description: 'Returns the status from the transaction receipt (1 = success, 0 = fail). Only applicable to post-Byzantium transactions.
+
+        '
+      tags:
+      - Transactions
+      parameters:
+      - name: module
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - transaction
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - gettxreceiptstatus
+      - name: txhash
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Transaction hash to check.
+      - $ref: '#/components/parameters/apikeyParam'
+      responses:
+        '200':
+          description: Transaction receipt status
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ApiResponse'
+                - type: object
+                  properties:
+                    result:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                          enum:
+                          - '0'
+                          - '1'
+components:
+  parameters:
+    apikeyParam:
+      name: apikey
+      in: query
+      required: false
+      schema:
+        type: string
+      description: API key for authenticated access. Use "placeholder" for free tier.
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          description: 1 for success, 0 for error.
+        message:
+          type: string
+          description: Human-readable status message (OK or NOTOK).
+        result:
+          description: The response payload (varies by endpoint).
+      required:
+      - status
+      - message
+      - result
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
+      description: 'Optional for free-tier usage (2 req/s, 10,000 calls/day). Register at routescan.io for increased limits.
+
+        '
