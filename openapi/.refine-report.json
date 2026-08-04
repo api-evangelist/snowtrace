@@ -1,0 +1,28 @@
+{
+  "provider": "snowtrace",
+  "sources": [
+    "snowtrace-accounts-api-openapi.yml",
+    "snowtrace-blocks-api-openapi.yml",
+    "snowtrace-contracts-api-openapi.yml",
+    "snowtrace-logs-api-openapi.yml",
+    "snowtrace-proxy-api-openapi.yml",
+    "snowtrace-stats-api-openapi.yml",
+    "snowtrace-tokens-api-openapi.yml",
+    "snowtrace-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "snowtrace-accounts-api-openapi.yml",
+    "snowtrace-blocks-api-openapi.yml",
+    "snowtrace-contracts-api-openapi.yml",
+    "snowtrace-logs-api-openapi.yml",
+    "snowtrace-proxy-api-openapi.yml",
+    "snowtrace-stats-api-openapi.yml",
+    "snowtrace-tokens-api-openapi.yml",
+    "snowtrace-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
