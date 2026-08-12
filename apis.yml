@@ -264,7 +264,7 @@ common:
   - type: Authentication
     url: authentication/snowtrace-authentication.yml
   - type: OpenAPI
-    url: /openapi/openapi.yml
+    url: openapi/_original/openapi.yml
   - type: Portal
     url: https://snowtrace.io/
   - type: Documentation
