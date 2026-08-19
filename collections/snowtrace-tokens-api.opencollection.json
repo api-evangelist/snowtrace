@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Routescan (Snowtrace) Etherscan-Compatible Accounts Tokens API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get ERC-20 token total supply",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/token/tokensupply",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "contractaddress",
+                "value": "",
+                "type": "query",
+                "description": "ERC-20 token contract address."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns the total supply of an ERC-20 token by its contract address.\n"
+        },
+        {
+          "info": {
+            "name": "Get ERC-20 token holder count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/token/tokenholdercount",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "contractaddress",
+                "value": "",
+                "type": "query",
+                "description": "ERC-20 token contract address."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns the number of unique holders for an ERC-20 token contract.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

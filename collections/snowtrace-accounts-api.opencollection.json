@@ -1,0 +1,500 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Routescan (Snowtrace) Etherscan-Compatible Accounts API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get native balance for a single address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/account/balance",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query",
+                "description": "API module name (account, block, contract, logs, token, stats, transaction, proxy)."
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "API action within the module."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars)."
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Pre-defined block parameter for balance queries."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns the native token (AVAX, ETH, etc.) balance of a given address at the latest block.\n"
+        },
+        {
+          "info": {
+            "name": "Get native balance for multiple addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/account/balancemulti",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of up to 20 addresses."
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Pre-defined block parameter for balance queries."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns the native token balance for up to 20 addresses in a single call. Pass addresses as a comma-separated list.\n"
+        },
+        {
+          "info": {
+            "name": "Get normal transactions by address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/account/txlist",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars)."
+              },
+              {
+                "name": "startblock",
+                "value": "",
+                "type": "query",
+                "description": "Starting block number for block-range queries."
+              },
+              {
+                "name": "endblock",
+                "value": "",
+                "type": "query",
+                "description": "Ending block number for block-range queries."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 10000)."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results (ascending or descending)."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns a list of normal (external) transactions performed by an address. Supports block range filtering and pagination.\n"
+        },
+        {
+          "info": {
+            "name": "Get internal transactions by address or transaction hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/account/txlistinternal",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Wallet or contract address (use with startblock/endblock)."
+              },
+              {
+                "name": "txhash",
+                "value": "",
+                "type": "query",
+                "description": "Transaction hash to retrieve internal txns for."
+              },
+              {
+                "name": "startblock",
+                "value": "",
+                "type": "query",
+                "description": "Starting block number for block-range queries."
+              },
+              {
+                "name": "endblock",
+                "value": "",
+                "type": "query",
+                "description": "Ending block number for block-range queries."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 10000)."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results (ascending or descending)."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns internal (EVM-level) transactions for a given address or a specific transaction hash. Optionally filter by block range.\n"
+        },
+        {
+          "info": {
+            "name": "Get ERC-20 token transfer events by address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/account/tokentx",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars)."
+              },
+              {
+                "name": "contractaddress",
+                "value": "",
+                "type": "query",
+                "description": "ERC-20 contract address to filter transfers."
+              },
+              {
+                "name": "startblock",
+                "value": "",
+                "type": "query",
+                "description": "Starting block number for block-range queries."
+              },
+              {
+                "name": "endblock",
+                "value": "",
+                "type": "query",
+                "description": "Ending block number for block-range queries."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 10000)."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results (ascending or descending)."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns a list of ERC-20 token transfer events for a given address. Optionally filter by token contract address and block range.\n"
+        },
+        {
+          "info": {
+            "name": "Get ERC-721 NFT transfer events by address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/account/tokennfttx",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars)."
+              },
+              {
+                "name": "contractaddress",
+                "value": "",
+                "type": "query",
+                "description": "ERC-721 contract address to filter transfers."
+              },
+              {
+                "name": "startblock",
+                "value": "",
+                "type": "query",
+                "description": "Starting block number for block-range queries."
+              },
+              {
+                "name": "endblock",
+                "value": "",
+                "type": "query",
+                "description": "Ending block number for block-range queries."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 10000)."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results (ascending or descending)."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns a list of ERC-721 (NFT) token transfer events for a given address. Optionally filter by NFT contract address and block range.\n"
+        },
+        {
+          "info": {
+            "name": "Get ERC-1155 token transfer events by address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/account/token1155tx",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars)."
+              },
+              {
+                "name": "contractaddress",
+                "value": "",
+                "type": "query",
+                "description": "ERC-1155 contract address to filter transfers."
+              },
+              {
+                "name": "startblock",
+                "value": "",
+                "type": "query",
+                "description": "Starting block number for block-range queries."
+              },
+              {
+                "name": "endblock",
+                "value": "",
+                "type": "query",
+                "description": "Ending block number for block-range queries."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 10000)."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results (ascending or descending)."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns a list of ERC-1155 multi-token transfer events for a given address. Optionally filter by token contract address and block range.\n"
+        },
+        {
+          "info": {
+            "name": "Get historical balance at a specific block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/account/balancehistory",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars)."
+              },
+              {
+                "name": "blockno",
+                "value": "",
+                "type": "query",
+                "description": "Block number at which to retrieve the balance."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns the native token balance of an address at a specific block number.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

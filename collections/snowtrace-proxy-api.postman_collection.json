@@ -1,0 +1,1032 @@
+{
+  "item": [
+    {
+      "id": "545de1ed-e235-4452-ab5a-13be2de2369a",
+      "name": "Proxy",
+      "description": {
+        "content": "Ethereum JSON-RPC compatible proxy endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ad08f80e-e3c6-436c-9dd9-a7ae70c4c9e3",
+          "name": "Get most recent block number (eth_blockNumber)",
+          "request": {
+            "name": "Get most recent block number (eth_blockNumber)",
+            "description": {
+              "content": "Proxies the eth_blockNumber JSON-RPC method and returns the number of the most recent block in hex.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy",
+                "eth_blockNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07531068-e0f4-4f56-8c91-8d35e6a12670",
+              "name": "Current block number in hex",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "eth_blockNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05dfb56d-4196-4aef-8dff-0171cbb14cb4",
+          "name": "Get block information by block number (eth_getBlockByNumber)",
+          "request": {
+            "name": "Get block information by block number (eth_getBlockByNumber)",
+            "description": {
+              "content": "Proxies the eth_getBlockByNumber JSON-RPC method. Returns block details for the given block tag or number.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy",
+                "eth_getBlockByNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "(Required) Block number in hex or one of latest/earliest/pending."
+                },
+                {
+                  "disabled": false,
+                  "key": "boolean",
+                  "value": "<boolean>",
+                  "description": "(Required) true to return full transaction objects; false for hashes only."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffa886fc-27cb-4968-91c2-494215299f76",
+              "name": "Block object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "eth_getBlockByNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "boolean",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"0\",\n  \"message\": \"string\",\n  \"result\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c6d837e-11ad-496e-a32d-a2fc94d9148e",
+          "name": "Get transaction by hash (eth_getTransactionByHash)",
+          "request": {
+            "name": "Get transaction by hash (eth_getTransactionByHash)",
+            "description": {
+              "content": "Proxies the eth_getTransactionByHash JSON-RPC method. Returns transaction details for the given hash.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy",
+                "eth_getTransactionByHash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "txhash",
+                  "value": "<string>",
+                  "description": "(Required) Transaction hash."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "107ef2c6-707e-4732-b856-83cfbc7fef45",
+              "name": "Transaction object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "eth_getTransactionByHash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "txhash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"0\",\n  \"message\": \"string\",\n  \"result\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7c46ab6-f4f1-493f-9782-f474128bfa38",
+          "name": "Get transaction receipt (eth_getTransactionReceipt)",
+          "request": {
+            "name": "Get transaction receipt (eth_getTransactionReceipt)",
+            "description": {
+              "content": "Proxies the eth_getTransactionReceipt JSON-RPC method. Returns the receipt for a mined transaction.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy",
+                "eth_getTransactionReceipt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "txhash",
+                  "value": "<string>",
+                  "description": "(Required) Transaction hash."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3d5092f-c052-4b6d-89df-343ff3e45fb6",
+              "name": "Transaction receipt object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "eth_getTransactionReceipt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "txhash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"0\",\n  \"message\": \"string\",\n  \"result\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56298472-af79-45bd-bb6a-75f3b5b5b8e0",
+          "name": "Execute contract call (eth_call)",
+          "request": {
+            "name": "Execute contract call (eth_call)",
+            "description": {
+              "content": "Proxies the eth_call JSON-RPC method. Executes a message call transaction without creating a transaction on the blockchain.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy",
+                "eth_call"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "(Required) Contract address to call."
+                },
+                {
+                  "disabled": false,
+                  "key": "data",
+                  "value": "<string>",
+                  "description": "(Required) ABI-encoded call data."
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "latest",
+                  "description": "Block parameter for the call."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f653169-86e5-491c-a45e-ec8edfcccf1f",
+              "name": "Call result in hex",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "eth_call"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "data",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "latest"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "401229b4-6f15-4d83-88ea-989d664d807f",
+          "name": "Get current gas price (eth_gasPrice)",
+          "request": {
+            "name": "Get current gas price (eth_gasPrice)",
+            "description": {
+              "content": "Proxies the eth_gasPrice JSON-RPC method. Returns the current gas price in Wei (hex-encoded).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy",
+                "eth_gasPrice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "607657a4-1193-4460-b72d-d24476caf907",
+              "name": "Current gas price in Wei",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "eth_gasPrice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbe9f809-b405-491c-93d1-ff43e266556e",
+          "name": "Estimate gas for a transaction (eth_estimateGas)",
+          "request": {
+            "name": "Estimate gas for a transaction (eth_estimateGas)",
+            "description": {
+              "content": "Proxies the eth_estimateGas JSON-RPC method. Returns an estimate of the gas needed to execute the given transaction.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "proxy",
+                "eth_estimateGas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "(Required) Target address for the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "data",
+                  "value": "<string>",
+                  "description": "ABI-encoded call data."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "Value in Wei to transfer."
+                },
+                {
+                  "disabled": false,
+                  "key": "gas",
+                  "value": "<string>",
+                  "description": "Gas limit in hex."
+                },
+                {
+                  "disabled": false,
+                  "key": "gasPrice",
+                  "value": "<string>",
+                  "description": "Gas price in Wei (hex)."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00d9fccc-798e-4a0e-bb81-d8756af546a3",
+              "name": "Estimated gas in hex",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "proxy",
+                    "eth_estimateGas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "data",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gas",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gasPrice",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "43114",
+      "key": "chainId"
+    },
+    {
+      "type": "string",
+      "value": "https://api.routescan.io/v2/network/mainnet/evm/{{chainId}}/etherscan/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ffc74252-b7f1-4197-b6f5-cf2dc224b495",
+    "name": "Routescan (Snowtrace) Etherscan-Compatible Accounts Proxy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.\n\n\nContact Support:\n Name: Routescan Support",
+      "type": "text/plain"
+    }
+  }
+}

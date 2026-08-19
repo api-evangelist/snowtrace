@@ -1,0 +1,322 @@
+{
+  "item": [
+    {
+      "id": "742e09ed-7f7c-4d1e-ae21-3009b52c9212",
+      "name": "Tokens",
+      "description": {
+        "content": "ERC-20 token supply and holder endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3257aafa-8a67-4c9d-915c-fb0ad300aeaa",
+          "name": "Get ERC-20 token total supply",
+          "request": {
+            "name": "Get ERC-20 token total supply",
+            "description": {
+              "content": "Returns the total supply of an ERC-20 token by its contract address.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token",
+                "tokensupply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "contractaddress",
+                  "value": "<string>",
+                  "description": "(Required) ERC-20 token contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ebff3f3-a378-4573-86ba-b6247adc1e30",
+              "name": "Token total supply",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token",
+                    "tokensupply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "contractaddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1643b7f-3918-4f62-925c-6aba387ef38b",
+          "name": "Get ERC-20 token holder count",
+          "request": {
+            "name": "Get ERC-20 token holder count",
+            "description": {
+              "content": "Returns the number of unique holders for an ERC-20 token contract.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token",
+                "tokenholdercount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "contractaddress",
+                  "value": "<string>",
+                  "description": "(Required) ERC-20 token contract address."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64fa5212-fa27-455d-8456-2188f406e937",
+              "name": "Token holder count",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token",
+                    "tokenholdercount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "contractaddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "43114",
+      "key": "chainId"
+    },
+    {
+      "type": "string",
+      "value": "https://api.routescan.io/v2/network/mainnet/evm/{{chainId}}/etherscan/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "41564473-0a77-4fe2-8eb4-a983cbb78998",
+    "name": "Routescan (Snowtrace) Etherscan-Compatible Accounts Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.\n\n\nContact Support:\n Name: Routescan Support",
+      "type": "text/plain"
+    }
+  }
+}

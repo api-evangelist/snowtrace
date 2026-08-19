@@ -1,0 +1,301 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Routescan (Snowtrace) Etherscan-Compatible Accounts Proxy API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Proxy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get most recent block number (eth_blockNumber)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/proxy/eth_blockNumber",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Proxies the eth_blockNumber JSON-RPC method and returns the number of the most recent block in hex.\n"
+        },
+        {
+          "info": {
+            "name": "Get block information by block number (eth_getBlockByNumber)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/proxy/eth_getBlockByNumber",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Block number in hex or one of latest/earliest/pending."
+              },
+              {
+                "name": "boolean",
+                "value": "",
+                "type": "query",
+                "description": "true to return full transaction objects; false for hashes only."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Proxies the eth_getBlockByNumber JSON-RPC method. Returns block details for the given block tag or number.\n"
+        },
+        {
+          "info": {
+            "name": "Get transaction by hash (eth_getTransactionByHash)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/proxy/eth_getTransactionByHash",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "txhash",
+                "value": "",
+                "type": "query",
+                "description": "Transaction hash."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Proxies the eth_getTransactionByHash JSON-RPC method. Returns transaction details for the given hash.\n"
+        },
+        {
+          "info": {
+            "name": "Get transaction receipt (eth_getTransactionReceipt)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/proxy/eth_getTransactionReceipt",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "txhash",
+                "value": "",
+                "type": "query",
+                "description": "Transaction hash."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Proxies the eth_getTransactionReceipt JSON-RPC method. Returns the receipt for a mined transaction.\n"
+        },
+        {
+          "info": {
+            "name": "Execute contract call (eth_call)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/proxy/eth_call",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Contract address to call."
+              },
+              {
+                "name": "data",
+                "value": "",
+                "type": "query",
+                "description": "ABI-encoded call data."
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Block parameter for the call."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Proxies the eth_call JSON-RPC method. Executes a message call transaction without creating a transaction on the blockchain.\n"
+        },
+        {
+          "info": {
+            "name": "Get current gas price (eth_gasPrice)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/proxy/eth_gasPrice",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Proxies the eth_gasPrice JSON-RPC method. Returns the current gas price in Wei (hex-encoded).\n"
+        },
+        {
+          "info": {
+            "name": "Estimate gas for a transaction (eth_estimateGas)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/proxy/eth_estimateGas",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Target address for the transaction."
+              },
+              {
+                "name": "data",
+                "value": "",
+                "type": "query",
+                "description": "ABI-encoded call data."
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "Value in Wei to transfer."
+              },
+              {
+                "name": "gas",
+                "value": "",
+                "type": "query",
+                "description": "Gas limit in hex."
+              },
+              {
+                "name": "gasPrice",
+                "value": "",
+                "type": "query",
+                "description": "Gas price in Wei (hex)."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Proxies the eth_estimateGas JSON-RPC method. Returns an estimate of the gas needed to execute the given transaction.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

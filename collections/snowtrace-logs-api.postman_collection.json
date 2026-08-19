@@ -1,0 +1,280 @@
+{
+  "item": [
+    {
+      "id": "076ec8e6-6ca6-4945-9e0c-4dfa476ef306",
+      "name": "Logs",
+      "description": {
+        "content": "Smart contract event log query endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "81de764e-b139-456b-b590-915a4895a5c1",
+          "name": "Get event logs by address and topics",
+          "request": {
+            "name": "Get event logs by address and topics",
+            "description": {
+              "content": "Returns event logs emitted by a smart contract address, filtered by block range and up to four indexed topics.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "logs",
+                "getLogs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "Contract address to filter logs."
+                },
+                {
+                  "disabled": false,
+                  "key": "startblock",
+                  "value": "0",
+                  "description": "Starting block number for block-range queries."
+                },
+                {
+                  "disabled": false,
+                  "key": "endblock",
+                  "value": "99999999",
+                  "description": "Ending block number for block-range queries."
+                },
+                {
+                  "disabled": false,
+                  "key": "topic0",
+                  "value": "<string>",
+                  "description": "First indexed event topic (event signature hash)."
+                },
+                {
+                  "disabled": false,
+                  "key": "topic1",
+                  "value": "<string>",
+                  "description": "Second indexed event topic."
+                },
+                {
+                  "disabled": false,
+                  "key": "topic2",
+                  "value": "<string>",
+                  "description": "Third indexed event topic."
+                },
+                {
+                  "disabled": false,
+                  "key": "topic3",
+                  "value": "<string>",
+                  "description": "Fourth indexed event topic."
+                },
+                {
+                  "disabled": false,
+                  "key": "topic0_1_opr",
+                  "value": "<string>",
+                  "description": "Logical operator between topic0 and topic1."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "10",
+                  "description": "Number of results per page (max 10000)."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec02c325-5533-497c-a2b8-a9b9d13d86c0",
+              "name": "List of event logs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs",
+                    "getLogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startblock",
+                      "value": "0"
+                    },
+                    {
+                      "key": "endblock",
+                      "value": "99999999"
+                    },
+                    {
+                      "key": "topic0",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topic1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topic2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topic3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "topic0_1_opr",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "43114",
+      "key": "chainId"
+    },
+    {
+      "type": "string",
+      "value": "https://api.routescan.io/v2/network/mainnet/evm/{{chainId}}/etherscan/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "56e8da3e-c437-4fa1-a933-d45c4d75331b",
+    "name": "Routescan (Snowtrace) Etherscan-Compatible Accounts Logs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.\n\n\nContact Support:\n Name: Routescan Support",
+      "type": "text/plain"
+    }
+  }
+}

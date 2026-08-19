@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Routescan (Snowtrace) Etherscan-Compatible Accounts Transactions API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check transaction execution status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/transaction/getstatus",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "txhash",
+                "value": "",
+                "type": "query",
+                "description": "Transaction hash to check."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns whether a transaction succeeded or failed during execution (errcode 0 = success, 1 = failure).\n"
+        },
+        {
+          "info": {
+            "name": "Check transaction receipt status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/transaction/gettxreceiptstatus",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "txhash",
+                "value": "",
+                "type": "query",
+                "description": "Transaction hash to check."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns the status from the transaction receipt (1 = success, 0 = fail). Only applicable to post-Byzantium transactions.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

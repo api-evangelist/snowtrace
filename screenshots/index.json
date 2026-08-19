@@ -1,0 +1,11 @@
+[
+  {
+    "repo": "snowtrace",
+    "captured_at": "2026-08-17T125325",
+    "source_url": "https://snowtrace.io/",
+    "source_type": "Portal",
+    "file": "snowtrace-2026-08-17T125325.png",
+    "bytes": 54454,
+    "capture": "playwright-local"
+  }
+]

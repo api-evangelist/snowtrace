@@ -1,0 +1,322 @@
+{
+  "item": [
+    {
+      "id": "a8adb7e7-3c5c-456e-a6ab-8c3b8623a1cb",
+      "name": "Transactions",
+      "description": {
+        "content": "Transaction execution and receipt status endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1d26696a-0a84-4ba5-8511-1af434b54ec9",
+          "name": "Check transaction execution status",
+          "request": {
+            "name": "Check transaction execution status",
+            "description": {
+              "content": "Returns whether a transaction succeeded or failed during execution (errcode 0 = success, 1 = failure).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transaction",
+                "getstatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "txhash",
+                  "value": "<string>",
+                  "description": "(Required) Transaction hash to check."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e48a1f20-7f97-4114-9a7a-74aee4c27d71",
+              "name": "Transaction execution status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    "getstatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "txhash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"0\",\n  \"message\": \"string\",\n  \"result\": {\n    \"isError\": \"1\",\n    \"errDescription\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa63746e-516d-4ed4-8aaf-67429619ee00",
+          "name": "Check transaction receipt status",
+          "request": {
+            "name": "Check transaction receipt status",
+            "description": {
+              "content": "Returns the status from the transaction receipt (1 = success, 0 = fail). Only applicable to post-Byzantium transactions.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transaction",
+                "gettxreceiptstatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "txhash",
+                  "value": "<string>",
+                  "description": "(Required) Transaction hash to check."
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9822fbc1-c869-491e-aec6-080635ac1efd",
+              "name": "Transaction receipt status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transaction",
+                    "gettxreceiptstatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "txhash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"1\",\n  \"message\": \"string\",\n  \"result\": {\n    \"status\": \"0\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "43114",
+      "key": "chainId"
+    },
+    {
+      "type": "string",
+      "value": "https://api.routescan.io/v2/network/mainnet/evm/{{chainId}}/etherscan/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "79af4b07-00ad-4b3e-9d83-2cc2fa63a66f",
+    "name": "Routescan (Snowtrace) Etherscan-Compatible Accounts Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.\n\n\nContact Support:\n Name: Routescan Support",
+      "type": "text/plain"
+    }
+  }
+}

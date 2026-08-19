@@ -1,0 +1,234 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Routescan (Snowtrace) Etherscan-Compatible Accounts Contracts API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get contract ABI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/contract/getabi",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars)."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns the ABI (Application Binary Interface) for a verified smart contract.\n"
+        },
+        {
+          "info": {
+            "name": "Get contract source code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/contract/getsourcecode",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars)."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns the Solidity source code and compilation metadata for a verified smart contract.\n"
+        },
+        {
+          "info": {
+            "name": "Get contract creator and creation transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/contract/getcontractcreation",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "contractaddresses",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of up to 5 contract addresses."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns the creator address and creation transaction hash for up to 5 smart contract addresses.\n"
+        },
+        {
+          "info": {
+            "name": "Verify smart contract source code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/contract/verifysourcecode",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "module",
+                  "value": ""
+                },
+                {
+                  "name": "action",
+                  "value": ""
+                },
+                {
+                  "name": "contractaddress",
+                  "value": ""
+                },
+                {
+                  "name": "sourceCode",
+                  "value": ""
+                },
+                {
+                  "name": "codeformat",
+                  "value": ""
+                },
+                {
+                  "name": "contractname",
+                  "value": ""
+                },
+                {
+                  "name": "compilerversion",
+                  "value": ""
+                },
+                {
+                  "name": "optimizationUsed",
+                  "value": ""
+                },
+                {
+                  "name": "runs",
+                  "value": ""
+                },
+                {
+                  "name": "constructorArguments",
+                  "value": ""
+                },
+                {
+                  "name": "evmversion",
+                  "value": ""
+                },
+                {
+                  "name": "licenseType",
+                  "value": ""
+                },
+                {
+                  "name": "apikey",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submits a smart contract's Solidity source code for verification. Limited to 250 verifications per day. Returns a GUID for status polling.\n"
+        },
+        {
+          "info": {
+            "name": "Check verification submission status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/contract/checkverifystatus",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "guid",
+                "value": "",
+                "type": "query",
+                "description": "GUID returned from the verifysourcecode submission."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Polls the status of a contract source code verification submission using the GUID returned by verifysourcecode.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

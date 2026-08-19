@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "246914f4-3290-431e-91f1-52b1eadd4a44",
+      "name": "Stats",
+      "description": {
+        "content": "Network statistics including token supply and prices.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7339be52-1438-46be-ac33-0ac7b716462b",
+          "name": "Get total AVAX supply",
+          "request": {
+            "name": "Get total AVAX supply",
+            "description": {
+              "content": "Returns the total supply of AVAX in Wei on the Avalanche C-Chain.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stats",
+                "avaxsupply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d5861e5-072e-43b8-996d-9854b6956d79",
+              "name": "Total AVAX supply in Wei",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "avaxsupply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"<Error: Could not resolve allOf schema\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b32d1022-7339-4b5a-8787-badd6c275d55",
+          "name": "Get last AVAX price in USD and BTC",
+          "request": {
+            "name": "Get last AVAX price in USD and BTC",
+            "description": {
+              "content": "Returns the latest AVAX price denominated in both USD and BTC.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stats",
+                "avaxprice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "module",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                  "type": "any",
+                  "value": "{{chainId}}",
+                  "key": "chainId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fecd6564-c461-4272-a348-190a81284968",
+              "name": "AVAX price data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "avaxprice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "module",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+                      "type": "any",
+                      "value": "{{chainId}}",
+                      "key": "chainId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"0\",\n  \"message\": \"string\",\n  \"result\": {\n    \"avaxbtc\": \"string\",\n    \"avaxbtc_timestamp\": \"string\",\n    \"avaxusd\": \"string\",\n    \"avaxusd_timestamp\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "EVM chain ID. Use 43114 for Avalanche C-Chain mainnet, 43113 for Avalanche Fuji testnet.\n",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "43114",
+      "key": "chainId"
+    },
+    {
+      "type": "string",
+      "value": "https://api.routescan.io/v2/network/mainnet/evm/{{chainId}}/etherscan/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "846c5dc5-92ec-428c-a424-f3566a72e24b",
+    "name": "Routescan (Snowtrace) Etherscan-Compatible Accounts Stats API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.\n\n\nContact Support:\n Name: Routescan Support",
+      "type": "text/plain"
+    }
+  }
+}

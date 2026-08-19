@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Routescan (Snowtrace) Etherscan-Compatible Accounts Logs API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get event logs by address and topics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api/logs/getLogs",
+            "params": [
+              {
+                "name": "module",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Contract address to filter logs."
+              },
+              {
+                "name": "startblock",
+                "value": "",
+                "type": "query",
+                "description": "Starting block number for block-range queries."
+              },
+              {
+                "name": "endblock",
+                "value": "",
+                "type": "query",
+                "description": "Ending block number for block-range queries."
+              },
+              {
+                "name": "topic0",
+                "value": "",
+                "type": "query",
+                "description": "First indexed event topic (event signature hash)."
+              },
+              {
+                "name": "topic1",
+                "value": "",
+                "type": "query",
+                "description": "Second indexed event topic."
+              },
+              {
+                "name": "topic2",
+                "value": "",
+                "type": "query",
+                "description": "Third indexed event topic."
+              },
+              {
+                "name": "topic3",
+                "value": "",
+                "type": "query",
+                "description": "Fourth indexed event topic."
+              },
+              {
+                "name": "topic0_1_opr",
+                "value": "",
+                "type": "query",
+                "description": "Logical operator between topic0 and topic1."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 10000)."
+              },
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "API key for authenticated access. Use \"placeholder\" for free tier."
+              }
+            ]
+          },
+          "docs": "Returns event logs emitted by a smart contract address, filtered by block range and up to four indexed topics.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
