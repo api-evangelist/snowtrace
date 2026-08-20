@@ -26,6 +26,17 @@ tags:
   - Explorer
   - Avalanche
   - EVM
+  - Multi-Chain
+  - Web3
+  - Transaction
+  - Smart Contracts
+  - NFT
+  - DeFi
+tags_raw:
+  - Blockchain
+  - Explorer
+  - Avalanche
+  - EVM
   - Multichain
   - Web3
   - Transactions
@@ -45,6 +56,13 @@ apis:
   humanURL: https://snowtrace.io/documentation/api/etherscan-like/accounts
   baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
   tags:
+  - Account
+  - Balances
+  - Transaction
+  - ERC-20
+  - ERC-721
+  - ERC-1155
+  tags_raw:
   - Accounts
   - Balances
   - Transactions
@@ -100,6 +118,10 @@ apis:
   baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
   tags:
   - Logs
+  - Event
+  - Smart Contracts
+  tags_raw:
+  - Logs
   - Events
   - Smart Contracts
   properties:
@@ -141,6 +163,10 @@ apis:
   humanURL: https://snowtrace.io/documentation
   baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
   tags:
+  - Transaction
+  - Status
+  - Receipts
+  tags_raw:
   - Transactions
   - Status
   - Receipts
@@ -182,6 +208,8 @@ apis:
   humanURL: https://snowtrace.io/documentation/api/etherscan-like/accounts
   baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -252,6 +280,8 @@ apis:
   humanURL: https://snowtrace.io/documentation/api/etherscan-like/accounts
   baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
