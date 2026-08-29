@@ -7,6 +7,18 @@ description: >
   token transfers, smart contract data, and event logs across Avalanche C-Chain,
   Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants
   multichain access across all indexed chains.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
