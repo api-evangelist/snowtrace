@@ -168,6 +168,10 @@ apis:
   baseURL: https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api
   tags:
   - Stats
+  - Networks
+  - Supply
+  tags_raw:
+  - Stats
   - Network
   - Supply
   properties:
