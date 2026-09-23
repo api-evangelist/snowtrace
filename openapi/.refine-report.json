@@ -1,14 +1,7 @@
 {
   "provider": "snowtrace",
   "sources": [
-    "snowtrace-accounts-api-openapi.yml",
-    "snowtrace-blocks-api-openapi.yml",
-    "snowtrace-contracts-api-openapi.yml",
-    "snowtrace-logs-api-openapi.yml",
-    "snowtrace-proxy-api-openapi.yml",
-    "snowtrace-stats-api-openapi.yml",
-    "snowtrace-tokens-api-openapi.yml",
-    "snowtrace-transactions-api-openapi.yml"
+    "_original/openapi.yml"
   ],
   "outputs": [
     "snowtrace-accounts-api-openapi.yml",
@@ -23,6 +16,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "snowtrace-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "snowtrace-blocks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "snowtrace-contracts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "snowtrace-logs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "snowtrace-proxy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "snowtrace-stats-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "snowtrace-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "snowtrace-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

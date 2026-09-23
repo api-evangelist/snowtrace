@@ -1,9 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Routescan (Snowtrace) Etherscan-Compatible Accounts Contracts API
-  description: 'Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.
-
-    '
+  title: Routescan (Snowtrace) Etherscan-Compatible Contracts API
+  description: Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.
   version: '2.0'
   contact:
     name: Routescan Support
@@ -35,9 +33,7 @@ paths:
     get:
       operationId: getContractABI
       summary: Get contract ABI
-      description: 'Returns the ABI (Application Binary Interface) for a verified smart contract.
-
-        '
+      description: Returns the ABI (Application Binary Interface) for a verified smart contract.
       tags:
       - Contracts
       parameters:
@@ -74,9 +70,7 @@ paths:
     get:
       operationId: getContractSourceCode
       summary: Get contract source code
-      description: 'Returns the Solidity source code and compilation metadata for a verified smart contract.
-
-        '
+      description: Returns the Solidity source code and compilation metadata for a verified smart contract.
       tags:
       - Contracts
       parameters:
@@ -141,9 +135,7 @@ paths:
     get:
       operationId: getContractCreation
       summary: Get contract creator and creation transaction
-      description: 'Returns the creator address and creation transaction hash for up to 5 smart contract addresses.
-
-        '
+      description: Returns the creator address and creation transaction hash for up to 5 smart contract addresses.
       tags:
       - Contracts
       parameters:
@@ -193,9 +185,7 @@ paths:
     post:
       operationId: verifySourceCode
       summary: Verify smart contract source code
-      description: 'Submits a smart contract''s Solidity source code for verification. Limited to 250 verifications per day. Returns a GUID for status polling.
-
-        '
+      description: Submits a smart contract's Solidity source code for verification. Limited to 250 verifications per day. Returns a GUID for status polling.
       tags:
       - Contracts
       requestBody:
@@ -270,9 +260,7 @@ paths:
     get:
       operationId: checkVerifyStatus
       summary: Check verification submission status
-      description: 'Polls the status of a contract source code verification submission using the GUID returned by verifysourcecode.
-
-        '
+      description: Polls the status of a contract source code verification submission using the GUID returned by verifysourcecode.
       tags:
       - Contracts
       parameters:
