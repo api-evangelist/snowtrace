@@ -334,14 +334,6 @@ paths:
                     result:
                       type: string
 components:
-  parameters:
-    apikeyParam:
-      name: apikey
-      in: query
-      required: false
-      schema:
-        type: string
-      description: API key for authenticated access. Use "placeholder" for free tier.
   schemas:
     ApiResponse:
       type: object
@@ -361,6 +353,14 @@ components:
       - status
       - message
       - result
+  parameters:
+    apikeyParam:
+      name: apikey
+      in: query
+      required: false
+      schema:
+        type: string
+      description: API key for authenticated access. Use "placeholder" for free tier.
   securitySchemes:
     apiKey:
       type: apiKey

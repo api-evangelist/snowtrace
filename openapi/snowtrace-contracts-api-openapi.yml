@@ -300,13 +300,6 @@ paths:
                       description: 'Pass: Verified or Pending in queue or Fail: reason.'
 components:
   parameters:
-    apikeyParam:
-      name: apikey
-      in: query
-      required: false
-      schema:
-        type: string
-      description: API key for authenticated access. Use "placeholder" for free tier.
     addressParam:
       name: address
       in: query
@@ -314,6 +307,13 @@ components:
       schema:
         type: string
       description: Ethereum-compatible wallet or contract address (0x-prefixed, 42 chars).
+    apikeyParam:
+      name: apikey
+      in: query
+      required: false
+      schema:
+        type: string
+      description: API key for authenticated access. Use "placeholder" for free tier.
   schemas:
     ApiResponse:
       type: object
