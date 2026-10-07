@@ -337,12 +337,6 @@ common:
   url: https://snowtrace.io/
 - type: Status
   url: https://snowtrace.io/
-- type: Plans
-  url: /plans/plans.yml
-- type: RateLimits
-  url: /rate-limits/rate-limits.yml
-- type: FinOps
-  url: /finops/finops.yml
 maintainers:
 - FN: Routescan
   url: https://routescan.io/
