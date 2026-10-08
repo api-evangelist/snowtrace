@@ -313,6 +313,10 @@ apis:
   - type: OpenAPI
     url: openapi/snowtrace-transactions-api-openapi.yml
 common:
+- type: RateLimits
+  url: rate-limits/rate-limits.yml
+- type: FinOps
+  url: finops/finops.yml
 - type: Website
   url: https://snowtrace.io
 - type: AgenticAccess
