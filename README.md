@@ -1,4 +1,4 @@
-# Routescan (Snowtrace) (snowtrace)
+# Routescan (Snowtrace)
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,198 +66,167 @@
 
 Routescan is the first multichain ecosystem explorer, search, API, and analytics platform for all major EVM chains. Operating as Snowtrace for Avalanche C-Chain, Routescan provides high-speed REST APIs compatible with the Etherscan API format, delivering near real-time access to transactions, token transfers, smart contract data, and event logs across Avalanche C-Chain, Arbitrum, Optimism, Base, and 40+ other EVM networks. A single API key grants multichain access across all indexed chains.
 
-## Tags
+**Areas:** Blockchain · Explorer · Avalanche · EVM · Multi-Chain · Web3 · Transaction · Smart Contracts · NFT · DeFi
 
-- Blockchain
-- Explorer
-- Avalanche
-- EVM
-- Multichain
-- Web3
-- Transactions
-- Smart Contracts
-- NFTs
-- DeFi
+## Routescan (Snowtrace) on APIs.io
 
-## Timestamps
+Everything profiled for Routescan (Snowtrace) is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/snowtrace/](https://apis.io/providers/snowtrace/)** — or go straight to one of the APIs or properties below.
 
-- **Created:** 2026-06-13
-- **Modified:** 2026-06-13
+### APIs (17)
 
-## APIs
+- [Routescan Etherscan-Compatible Account API](https://apis.io/apis/snowtrace/routescan-etherscan-compatible-account-api/) — Retrieve address balances, normal and internal transaction histories, ERC-20 token transfers, ERC-721 NFT transfers, ERC-1155 token transfers, and…
+- [Routescan Etherscan-Compatible Block API](https://apis.io/apis/snowtrace/routescan-etherscan-compatible-block-api/) — Query block rewards and estimated block countdown for specific block numbers on any Routescan-indexed EVM chain.
+- [Routescan Etherscan-Compatible Contract API](https://apis.io/apis/snowtrace/routescan-etherscan-compatible-contract-api/) — Access verified smart contract ABIs, source code, and creation transaction data. Supports contract source code verification via POST with up to 250…
+- [Routescan Etherscan-Compatible Logs API](https://apis.io/apis/snowtrace/routescan-etherscan-compatible-logs-api/) — Query event logs emitted by smart contracts using filter parameters including address, block range, and up to four indexed topics. Useful for tracking…
+- [Routescan Etherscan-Compatible Token API](https://apis.io/apis/snowtrace/routescan-etherscan-compatible-token-api/) — Retrieve ERC-20 token supply, token holder information, and token metadata for fungible tokens on Routescan-indexed EVM chains.
+- [Routescan Etherscan-Compatible Stats API](https://apis.io/apis/snowtrace/routescan-etherscan-compatible-stats-api/) — Access network statistics including total AVAX supply, last price, and validator/node count for the Avalanche C-Chain and other supported EVM networks.
+- [Routescan Etherscan-Compatible Transaction API](https://apis.io/apis/snowtrace/routescan-etherscan-compatible-transaction-api/) — Check transaction execution status (success or failure) and receipt status for any transaction hash on Routescan-indexed EVM chains.
+- [Routescan Geth/Parity Proxy API](https://apis.io/apis/snowtrace/routescan-gethparity-proxy-api/) — Ethereum JSON-RPC compatible proxy endpoints for standard methods including eth_blockNumber, eth_getBlockByNumber, eth_getTransactionByHash,…
+- [Routescan Nametags API](https://apis.io/apis/snowtrace/routescan-nametags-api/) — Retrieve address labels and nametags applied to known wallets, contracts, and entities indexed by Routescan across all supported EVM chains.
+- [Routescan (Snowtrace) Accounts API](https://apis.io/apis/snowtrace/snowtrace-accounts-api/) — Address balance and transaction history endpoints.
+- [Routescan (Snowtrace) Blocks API](https://apis.io/apis/snowtrace/snowtrace-blocks-api/) — Block rewards and countdown endpoints.
+- [Routescan (Snowtrace) Contracts API](https://apis.io/apis/snowtrace/snowtrace-contracts-api/) — Smart contract ABI, source code, and verification endpoints.
+- [Routescan (Snowtrace) Logs API](https://apis.io/apis/snowtrace/snowtrace-logs-api/) — Smart contract event log query endpoints.
+- [Routescan (Snowtrace) Proxy API](https://apis.io/apis/snowtrace/snowtrace-proxy-api/) — Ethereum JSON-RPC compatible proxy endpoints.
+- [Routescan (Snowtrace) Stats API](https://apis.io/apis/snowtrace/snowtrace-stats-api/) — Network statistics including token supply and prices.
+- [Routescan (Snowtrace) Tokens API](https://apis.io/apis/snowtrace/snowtrace-tokens-api/) — ERC-20 token supply and holder endpoints.
+- [Routescan (Snowtrace) Transactions API](https://apis.io/apis/snowtrace/snowtrace-transactions-api/) — Transaction execution and receipt status endpoints.
 
-### Routescan Etherscan-Compatible Account API
+### Published properties
 
-Retrieve address balances, normal and internal transaction histories, ERC-20 token transfers, ERC-721 NFT transfers, ERC-1155 token transfers, and historical balance data by block number for any EVM address across all Routescan-indexed chains.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Human URL:** [https://snowtrace.io/documentation/api/etherscan-like/accounts](https://snowtrace.io/documentation/api/etherscan-like/accounts)
-- **Base URL:** `https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Accounts
-- Balances
-- Transactions
-- ERC-20
-- ERC-721
-- ERC-1155
+- [Snowtrace Agentic Access](https://apis.io/agentic-access/snowtrace/snowtrace-agentic-access/)
 
-#### Properties
+#### JSON Schema (3)
 
-- [Documentation](https://snowtrace.io/documentation/api/etherscan-like/accounts)
+The data models the API reads and writes.
 
-### Routescan Etherscan-Compatible Block API
+- [Routescan API Response Envelope](https://apis.io/schemas/snowtrace/api-response/)
+- [Routescan Token Transfer](https://apis.io/schemas/snowtrace/token-transfer/)
+- [Routescan Transaction](https://apis.io/schemas/snowtrace/transaction/)
 
-Query block rewards and estimated block countdown for specific block numbers on any Routescan-indexed EVM chain.
+#### JSON-LD (1)
 
-- **Human URL:** [https://snowtrace.io/documentation](https://snowtrace.io/documentation)
-- **Base URL:** `https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [context Context](https://apis.io/jsonld/snowtrace/context/)
 
-- Blocks
-- Block Rewards
+#### Examples (5)
 
-#### Properties
+Example requests and responses.
 
+- [Get Balance](https://apis.io/examples/snowtrace/get-balance/)
+- [Get Contract Abi](https://apis.io/examples/snowtrace/get-contract-abi/)
+- [Get Erc20 Transfers](https://apis.io/examples/snowtrace/get-erc20-transfers/)
+- [Get Logs](https://apis.io/examples/snowtrace/get-logs/)
+- [Get Normal Transactions](https://apis.io/examples/snowtrace/get-normal-transactions/)
+
+#### Collections (8)
+
+Postman and Open Collection request collections.
+
+- [Routescan (Snowtrace) Etherscan-Compatible Accounts API](https://apis.io/collections/snowtrace/open-snowtrace-accounts-api/)
+- [Routescan (Snowtrace) Etherscan-Compatible Accounts Blocks API](https://apis.io/collections/snowtrace/open-snowtrace-blocks-api/)
+- [Routescan (Snowtrace) Etherscan-Compatible Accounts Contracts API](https://apis.io/collections/snowtrace/open-snowtrace-contracts-api/)
+- [Routescan (Snowtrace) Etherscan-Compatible Accounts Logs API](https://apis.io/collections/snowtrace/open-snowtrace-logs-api/)
+- [Routescan (Snowtrace) Etherscan-Compatible Accounts Proxy API](https://apis.io/collections/snowtrace/open-snowtrace-proxy-api/)
+- [Routescan (Snowtrace) Etherscan-Compatible Accounts Stats API](https://apis.io/collections/snowtrace/open-snowtrace-stats-api/)
+- [Routescan (Snowtrace) Etherscan-Compatible Accounts Tokens API](https://apis.io/collections/snowtrace/open-snowtrace-tokens-api/)
+- [Routescan (Snowtrace) Etherscan-Compatible Accounts Transactions API](https://apis.io/collections/snowtrace/open-snowtrace-transactions-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Routescan (Snowtrace) — jsonschema rules](https://apis.io/rules/snowtrace/snowtrace-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Snowtrace Authentication](https://apis.io/security/snowtrace/snowtrace-authentication/)
+- [Snowtrace Domain Security](https://apis.io/security/snowtrace/snowtrace-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/snowtrace/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/snowtrace/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/snowtrace/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://snowtrace.io)
 - [Documentation](https://snowtrace.io/documentation)
+- [Terms of service](https://snowtrace.io/)
 
-### Routescan Etherscan-Compatible Contract API
+## API Evangelist rating
 
-Access verified smart contract ABIs, source code, and creation transaction data. Supports contract source code verification via POST with up to 250 verifications per day, and status checking for verification submissions.
+**Kin Score 33.6** — thin · rubric 0.24.0 · scored 2026-10-17
 
-- **Human URL:** [https://snowtrace.io/documentation/api/etherscan-like/contracts](https://snowtrace.io/documentation/api/etherscan-like/contracts)
-- **Base URL:** `https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api`
+| Facet | Score |
+|---|---|
+| Discoverability | 60.7 |
+| Contract quality | 54.8 |
+| Contract governance | 9.8 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 31.6 |
 
-#### Tags
+**Agent readiness 20.4** — agent-aware
 
-- Contracts
-- Smart Contracts
-- ABI
-- Verification
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-#### Properties
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
 
-- [Documentation](https://snowtrace.io/documentation/api/etherscan-like/contracts)
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/snowtrace/](https://apis.io/providers/snowtrace/).
 
-### Routescan Etherscan-Compatible Logs API
+## How this profile is made
 
-Query event logs emitted by smart contracts using filter parameters including address, block range, and up to four indexed topics. Useful for tracking on-chain events in real time.
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- **Human URL:** [https://snowtrace.io/documentation](https://snowtrace.io/documentation)
-- **Base URL:** `https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api`
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Routescan (Snowtrace): the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-#### Tags
+## Open an issue
 
-- Logs
-- Events
-- Smart Contracts
-
-#### Properties
-
-- [Documentation](https://snowtrace.io/documentation)
-
-### Routescan Etherscan-Compatible Token API
-
-Retrieve ERC-20 token supply, token holder information, and token metadata for fungible tokens on Routescan-indexed EVM chains.
-
-- **Human URL:** [https://snowtrace.io/documentation](https://snowtrace.io/documentation)
-- **Base URL:** `https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api`
-
-#### Tags
-
-- Tokens
-- ERC-20
-- Token Supply
-
-#### Properties
-
-- [Documentation](https://snowtrace.io/documentation)
-
-### Routescan Etherscan-Compatible Stats API
-
-Access network statistics including total AVAX supply, last price, and validator/node count for the Avalanche C-Chain and other supported EVM networks.
-
-- **Human URL:** [https://snowtrace.io/documentation](https://snowtrace.io/documentation)
-- **Base URL:** `https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api`
-
-#### Tags
-
-- Stats
-- Network
-- Supply
-
-#### Properties
-
-- [Documentation](https://snowtrace.io/documentation)
-
-### Routescan Etherscan-Compatible Transaction API
-
-Check transaction execution status (success or failure) and receipt status for any transaction hash on Routescan-indexed EVM chains.
-
-- **Human URL:** [https://snowtrace.io/documentation](https://snowtrace.io/documentation)
-- **Base URL:** `https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api`
-
-#### Tags
-
-- Transactions
-- Status
-- Receipts
-
-#### Properties
-
-- [Documentation](https://snowtrace.io/documentation)
-
-### Routescan Geth/Parity Proxy API
-
-Ethereum JSON-RPC compatible proxy endpoints for standard methods including eth_blockNumber, eth_getBlockByNumber, eth_getTransactionByHash, eth_getTransactionReceipt, eth_call, eth_gasPrice, and eth_estimateGas.
-
-- **Human URL:** [https://snowtrace.io/documentation](https://snowtrace.io/documentation)
-- **Base URL:** `https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api`
-
-#### Tags
-
-- RPC
-- Proxy
-- Ethereum
-- JSON-RPC
-
-#### Properties
-
-- [Documentation](https://snowtrace.io/documentation)
-
-### Routescan Nametags API
-
-Retrieve address labels and nametags applied to known wallets, contracts, and entities indexed by Routescan across all supported EVM chains.
-
-- **Human URL:** [https://snowtrace.io/documentation](https://snowtrace.io/documentation)
-- **Base URL:** `https://api.routescan.io/v2/network/mainnet/evm/{chainId}/etherscan/api`
-
-#### Tags
-
-- Labels
-- Nametags
-- Addresses
-
-#### Properties
-
-- [Documentation](https://snowtrace.io/documentation)
-
-## Common Properties
-
-- [OpenAPI](/openapi/openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Portal](https://snowtrace.io/)
-- [Documentation](https://snowtrace.io/documentation)
-- [Plans](https://snowtrace.io/documentation)
-- [Sign Up](https://routescan.io/)
-- [Contact](https://snowtrace.io/contactus)
-- [Terms of Service](https://snowtrace.io/)
-- [Status](https://snowtrace.io/)
-- [Plans](/plans/plans.yml)
-- [Rate Limits](/rate-limits/rate-limits.yml)
-- [Fin Ops](/finops/finops.yml)
-
-## Maintainers
-
-**FN:** Routescan
-**URL:** https://routescan.io/
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/snowtrace/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
